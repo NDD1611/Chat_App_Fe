@@ -1,0 +1,52 @@
+.contentModalInfo {
+    position: relative;
+    width: 100%;
+
+    .image {
+        width: 100%;
+
+        img {
+            width: 100%;
+            height: 150px;
+        }
+    }
+
+    .avatarInfo {
+        background-color: #fff;
+        position: absolute;
+        border-radius: 50%;
+        top: 120px;
+        left: calc(50% - 30px);
+    }
+
+    .name {
+        padding-top: 30px;
+        text-align: center;
+    }
+
+    .userInfo {
+        padding: 10px;
+
+        div {
+            display: flex;
+
+            p {
+                width: 150px;
+            }
+        }
+
+        .divBtn {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .btnShowModalUpdateInfo {
+                padding: 5px 10px;
+                border: none;
+                display: flex;
+                gap: 10px;
+            }
+        }
+    }
+}

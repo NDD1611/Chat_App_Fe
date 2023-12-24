@@ -1,0 +1,139 @@
+@import '../../../styles/global.module.scss';
+
+.dateShow {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+
+    p {
+        background-color: #ccc;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}
+
+.footerDate {
+    display: flex;
+    justify-content: flex-end;
+    color: #555;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.footerDateDark {
+    color: #fff;
+}
+
+.messageRight {
+    display: flex;
+    justify-content: flex-end;
+
+    .containerFileRight {
+        background-color: #BFDCC8;
+    }
+
+    .content {
+        word-wrap: break-word;
+        padding: 10px 20px;
+        background-color: #BFDCC8;
+        border-radius: 5px;
+
+    }
+
+    .contentImage {
+        width: fit-content;
+        word-wrap: break-word;
+        margin-top: 3px;
+        min-width: 100px;
+        max-width: 60%;
+
+        .messageImage {
+            border-radius: 15px;
+            position: relative;
+            overflow-y: hidden;
+
+            img {
+                max-width: 100%;
+                height: 100%;
+                border-radius: 15px;
+            }
+
+            .loaderImage {
+                // background-color: #ebe5e5fa;
+                color: #fff;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+
+                .backgroundImageLoader {
+                    position: absolute;
+                    background-color: #fff;
+                    opacity: 0.5;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .circularProgress {
+                    position: relative;
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    background: conic-gradient($primary-color 3.6deg, #ededed 0deg);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 2;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background-color: #fff;
+                    }
+
+                    .progressValue {
+                        position: relative;
+                        font-size: 10px;
+                        font-weight: 600;
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.status {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    .contentStatus {
+        background-color: #6e82b4;
+        border-radius: 5px;
+        padding: 3px 5px;
+        color: #fff;
+        opacity: 0.5;
+    }
+}
+
+.messageRightDark {
+
+    .containerFileRight {
+        background-color: #385541;
+    }
+
+    .content {
+        background-color: #385541;
+    }
+}

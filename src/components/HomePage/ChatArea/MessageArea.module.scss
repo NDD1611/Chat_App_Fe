@@ -1,0 +1,61 @@
+.dateShow {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+
+    p {
+        background-color: #ccc;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}
+
+.messageArea {
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    background-color: #E1EAE4;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .acceptFriend {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .containerMessageLeft {
+        display: flex;
+
+        .containerLeft {
+            display: flex;
+            justify-content: center;
+            padding: 0 5px;
+            padding-top: 5px;
+            width: 40px;
+        }
+    }
+}
+
+
+.messageAreaDark {
+    background-color: #313A34;
+    color: #fff;
+}

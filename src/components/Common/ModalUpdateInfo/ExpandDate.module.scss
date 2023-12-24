@@ -1,0 +1,55 @@
+.expand {
+    border: 1px solid #ccc;
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    top: -202px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-shadow: 0 0 10px 0 #ccc;
+    background-color: #fff;
+
+    .hideIconCheck {
+        display: none;
+    }
+
+    .bgBlue {
+        background-color: #e5efff !important;
+    }
+
+    .iconCheck {
+        font-size: 10px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .element {
+        padding: 5px 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #dfe2e7;
+        }
+    }
+
+    /* width */
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}

@@ -1,0 +1,57 @@
+.HeaderTabTwo {
+    display: flex;
+    padding: 10px 10px;
+    gap: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        border: none;
+        background-color: #eaedf0;
+        padding: 3px 10px;
+        // height: 30px;
+        border-radius: 5px;
+
+        &:focus {
+            outline-color: #8bbae9;
+            background-color: #fff;
+        }
+    }
+
+}
+
+.iconAddFriend {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+
+    // &:hover {
+    //     background-color: #eaedf0;
+    // }
+}
+
+.iconAddGroup {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+
+    span {
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    // &:hover {
+    //     background-color: #eaedf0;
+    // }
+}

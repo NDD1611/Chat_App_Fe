@@ -1,0 +1,170 @@
+.ChatArea {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    background-color: #E1EAE4;
+
+    .iconTopDivInput {
+        width: 10%;
+    }
+
+    .chatOnboard {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
+    .chatMessage {
+        background-color: #eef0f1;
+    }
+
+    .inputArea {
+        position: relative;
+
+        .mainInput {
+            width: 100%;
+            border-top: 1px solid #ccc;
+            display: flex;
+
+            .divInputFake {
+                padding: 15px;
+                word-wrap: break-word;
+                max-height: 150px;
+                overflow-y: scroll;
+                line-height: 20px;
+
+                &::-webkit-scrollbar {
+                    width: 7px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #E1EAE4 !important;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: #E1EAE4;
+                    border-radius: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+
+                .emojiDivInput {
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 1px;
+                    margin-right: 1px;
+                }
+
+                &:empty:not(:focus):before {
+                    content: attr(data-text);
+                    color: gray;
+                }
+
+                &:empty:focus:before {
+                    content: attr(data-text);
+                    color: gray;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+
+                &::-webkit-scrollbar {
+                    width: 7px;
+                }
+
+                /* Track */
+                &::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                }
+
+                /* Handle */
+                &::-webkit-scrollbar-thumb {
+                    background: #ccc;
+                    border-radius: 10px;
+                }
+
+                /* Handle on hover */
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+            }
+
+            .rightInputArea {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                padding: 0 20px;
+
+                .buttonShowEmoji {
+                    position: relative;
+                    cursor: pointer;
+                }
+
+                .btnSend {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
+                    background-color: #4EAC6D;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+
+                svg {
+                    font-size: 20px;
+                    border: none;
+                }
+            }
+        }
+
+        .containerEmojiPicker {
+            position: absolute;
+            top: -450px;
+            right: 10px;
+        }
+    }
+}
+
+.ChatAreaDark {
+    background-color: #2F3431;
+
+    .inputArea {
+        color: #E1EAE4;
+
+        .mainInput {
+            .divInputFake {
+                padding: 15px;
+                word-wrap: break-word;
+                max-height: 150px;
+                overflow-y: scroll;
+                line-height: 20px;
+
+                &::-webkit-scrollbar {
+                    width: 7px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #2F3431 !important;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: #2F3431;
+                    border-radius: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #2F3431;
+                }
+            }
+        }
+    }
+}

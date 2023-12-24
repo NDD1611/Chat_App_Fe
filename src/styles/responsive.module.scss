@@ -1,0 +1,15 @@
+@mixin mobile {
+    @media (max-width: 699px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 700px) {
+        @content;
+    }
+}
+
+@mixin test {
+    color: red;
+}

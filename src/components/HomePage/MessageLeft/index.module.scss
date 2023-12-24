@@ -1,0 +1,59 @@
+.messageLeft {
+    padding-top: 5px;
+
+    .content {
+        padding: 10px 15px;
+        background-color: #fff;
+        border-radius: 3px;
+        word-wrap: break-word;
+
+    }
+
+    .containerFileLeft {
+        background-color: #fff;
+    }
+
+    .footerDate {
+        color: #555;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+
+    .contentImage {
+        width: fit-content;
+        word-wrap: break-word;
+        margin-top: 3px;
+        min-width: 100px;
+        overflow-y: hidden;
+        border-radius: 15px;
+
+        .messageImage {
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.messageLeftDark {
+    padding-top: 5px;
+
+    .footerDate {
+        color: #fff;
+    }
+
+    .containerFileLeft {
+        background-color: #2F3431;
+    }
+
+    .content {
+        padding: 10px 15px;
+        background-color: #2F3431;
+        border-radius: 3px;
+        word-wrap: break-word;
+
+    }
+}
