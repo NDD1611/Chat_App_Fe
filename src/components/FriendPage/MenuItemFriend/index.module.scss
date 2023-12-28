@@ -1,0 +1,45 @@
+.Item {
+    display: flex;
+    cursor: pointer;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+
+    &:hover {
+        background-color: #f7f7f8;
+    }
+
+    .quantityFriendInvitation {
+        position: absolute;
+        height: 100%;
+        width: 30px;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+
+        span {
+            background-color: red;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 10px;
+            color: #fff;
+        }
+    }
+}
+
+.Icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+
+}
+
+.selectItem {
+    background-color: #E5EFFF;
+}

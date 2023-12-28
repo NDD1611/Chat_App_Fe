@@ -1,10 +1,4 @@
-
-
-const Friend = () => {
-
-    return <>
-        Friend
-    </>
+import { FriendPage } from "@/components/FriendPage";
+export default function Friend() {
+    return <FriendPage></FriendPage>;
 }
-
-export default Friend;

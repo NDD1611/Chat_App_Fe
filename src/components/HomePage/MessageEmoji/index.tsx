@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Emoji } from "emoji-picker-react";
+import { Image } from "@mantine/core";
 
 export const MessageEmoji = ({ text }: { text: any }) => {
     const [listContents, setListContent] = useState<any>([]);
@@ -27,10 +28,17 @@ export const MessageEmoji = ({ text }: { text: any }) => {
         <>
             <div>
                 {listContents.map((content: any, index: any) => {
+                    console.log(content);
                     if (content !== "") {
                         if (content.includes("&#x")) {
                             let newContent = content.slice(3, 8);
-                            return <Emoji key={index} unified={newContent} size={16} />;
+                            return (
+                                <img
+                                    key={index}
+                                    src={`https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/${newContent}.png`}
+                                    className={`inline-block w-[16px] h-[16px]`}
+                                />
+                            );
                         } else {
                             return (
                                 <span key={index} className="spanMessage">

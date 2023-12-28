@@ -8,8 +8,8 @@
 
 .contentFile {
     display: flex;
-    gap: 20px;
-    padding: 15px;
+    gap: 10px;
+    padding: 8px;
     border-radius: 10px;
     min-width: 100px;
     width: 300px;
@@ -47,12 +47,6 @@
             word-break: break-all;
             margin: 0;
             max-width: 300px;
-
-            // @include mobile {
-            //     max-width: 100px;
-            //     word-break: normal;
-            //     overflow-x: hidden;
-            // }
         }
 
         .progress {
@@ -89,6 +83,10 @@
             .download {
                 cursor: pointer;
                 color: #000;
+            }
+
+            .downloadBtn {
+                background-color: $primary-color;
             }
         }
     }

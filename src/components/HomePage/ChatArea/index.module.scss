@@ -1,9 +1,12 @@
+@import "../../../styles/global.module.scss";
+
 .ChatArea {
     width: 100%;
     height: 100%;
     position: relative;
     margin: 0;
-    background-color: #E1EAE4;
+    font-size: 13px;
+    background-color: #F3F4F6;
 
     .iconTopDivInput {
         width: 10%;
@@ -42,11 +45,11 @@
                 }
 
                 &::-webkit-scrollbar-track {
-                    background: #E1EAE4 !important;
+                    background: #F3F4F6 !important;
                 }
 
                 &::-webkit-scrollbar-thumb {
-                    background: #E1EAE4;
+                    background: #F3F4F6;
                     border-radius: 10px;
                 }
 
@@ -55,6 +58,7 @@
                 }
 
                 .emojiDivInput {
+                    display: inline-block;
                     width: 20px;
                     height: 20px;
                     margin-left: 1px;
@@ -112,7 +116,7 @@
                     width: 40px;
                     height: 40px;
                     border-radius: 10px;
-                    background-color: #4EAC6D;
+                    background-color: $primary-color;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -128,6 +132,7 @@
 
         .containerEmojiPicker {
             position: absolute;
+            z-index: 1000;
             top: -450px;
             right: 10px;
         }

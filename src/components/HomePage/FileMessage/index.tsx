@@ -7,6 +7,7 @@ import { getBlob, getStorage, ref } from "firebase/storage";
 import { calcFileSize } from "@/utils/message.util";
 import { IconDownload } from "@tabler/icons-react";
 import { Button } from "@mantine/core";
+import { firebaseConfig } from "@/firebase/firebase.config";
 
 export const FileMessage = ({ message }: { message: any }) => {
     const [fileName, setFileName] = useState("");
@@ -35,15 +36,6 @@ export const FileMessage = ({ message }: { message: any }) => {
     const downloadFileFirebase = async () => {
         try {
             setShowLoader(true);
-            const firebaseConfig = {
-                apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-                authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
-                projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
-                storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
-                messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDERID,
-                appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
-                measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENTID,
-            };
             const app = initializeApp(firebaseConfig);
             const storage = getStorage();
             let fileNameOnCloud = message.content.split("?")[0].split("%2F").pop();
@@ -101,18 +93,18 @@ export const FileMessage = ({ message }: { message: any }) => {
                         <div>
                             {showLoader ? (
                                 <Button
+                                    className={styles.downloadBtn}
                                     classNames={styles}
                                     onClick={downloadFileFirebase}
                                     loading
                                     loaderProps={{ type: "dots" }}
-                                    bg={"#4EAC6D"}
                                 >
                                     <IconDownload size={20} color="#fff" />
                                 </Button>
                             ) : (
                                 <Button
+                                    className={styles.downloadBtn}
                                     classNames={styles}
-                                    bg={"#4EAC6D"}
                                     onClick={downloadFileFirebase}
                                 >
                                     <IconDownload size={20} color="#fff" />

@@ -61,7 +61,6 @@ export const MessageArea = () => {
                     conversationId: conversationSelected._id,
                 });
                 // emit update sender
-
                 updateStatusMessage({
                     listMessage: listMessageStatusEqual2,
                     conversationId: conversationSelected._id,
@@ -104,7 +103,9 @@ export const MessageArea = () => {
         <>
             <div
                 id="messageArea"
-                className={`${styles.messageArea} ${theme === "dark" && styles.messageAreaDark}`}
+                className={`${styles.messageArea} bg-[#F3F4F6] ${
+                    theme === "dark" && styles.messageAreaDark
+                }`}
                 ref={messageAreaElement}
             >
                 <div style={{ height: "30px" }}></div>

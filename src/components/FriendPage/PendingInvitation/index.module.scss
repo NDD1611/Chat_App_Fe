@@ -1,0 +1,73 @@
+@import '../../../styles/global.module.scss';
+@import '../../../styles/responsive.module.scss';
+
+.PendingInvitation {
+    width: 100%;
+    background-color: #f7f7f8;
+
+    .headerInvitation {
+        padding: 30px;
+        font-size: 16px;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+
+        .backButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 20px;
+        }
+
+        .headerIcon {
+            padding-right: 10px;
+        }
+    }
+
+    .noResult {
+        font-size: 20px;
+        display: flex;
+        // height: 80vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .titleNoResult {
+
+            @include mobile {
+                font-size: 15px;
+            }
+
+        }
+    }
+
+    .centerPending {
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 20px;
+
+        .pendingInvitationItem {
+            border-radius: 5px;
+            // width: 200px;
+            padding: 10px;
+            background-color: #fff;
+
+            .topItem {
+                display: flex;
+                gap: 40px;
+
+                .name {
+                    align-items: center;
+                }
+            }
+
+            .bottomItem {
+                display: flex;
+                justify-content: space-between;
+                padding-top: 10px;
+                gap: 10px;
+            }
+        }
+    }
+}

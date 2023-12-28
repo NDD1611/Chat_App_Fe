@@ -100,7 +100,7 @@ export const HeaderChatArea = () => {
                 } `}
             >
                 {showLoader && <LoaderModal />}
-                <div className={styles.headerContent}>
+                <div className={`${styles.headerContent} bg-[#F3F4F6]`}>
                     <div className={styles.headerLeft}>
                         {window.innerWidth < 700 && (
                             <div className={styles.backButton} onClick={handleBackConversation}>

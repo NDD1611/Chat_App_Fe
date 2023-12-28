@@ -1,7 +1,7 @@
+"use client";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import styles from "./index.module.scss";
-import dynamic from "next/dynamic";
 import { sendMessage, sendMessageGroup } from "@/socket/connection.socket";
 import { MessageArea } from "./MessageArea";
 import { conversationActions } from "@/redux/actions/conversationAction";
@@ -11,13 +11,7 @@ import { IconTopInputArea } from "./IconTopInputArea";
 import { useLingui } from "@lingui/react";
 import { IconMoodSmile, IconSend } from "@tabler/icons-react";
 import { RootState } from "@/redux/store";
-
-const EmojiPicker = dynamic(
-    () => {
-        return import("emoji-picker-react");
-    },
-    { ssr: false },
-);
+import EmojiPicker from "emoji-picker-react";
 
 const ChatArea = () => {
     const { i18n } = useLingui();
@@ -28,7 +22,7 @@ const ChatArea = () => {
     const theme = useSelector((state: RootState) => state.themeMode.theme);
     const [receiverUser, setReceiverUser] = useState<any>({});
     const [userDetails, setUserDetails] = useState<any>({});
-    const [showEmoji, setShowEmoji] = useState(false);
+    const [showEmoji, setShowEmoji] = useState<Boolean>(false);
     const [isGroup, setIsGroup] = useState(false);
     const chatMessageElement = useRef<any>();
     const inputAreaElement = useRef<any>();
@@ -39,9 +33,14 @@ const ChatArea = () => {
         const userDetailsJson = localStorage.getItem("userDetails");
         const userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
         setUserDetails(userDetails);
-        document.addEventListener("click", (e) => {
+        window.addEventListener("click", () => {
             setShowEmoji(false);
         });
+        return () => {
+            window.removeEventListener("click", () => {
+                setShowEmoji(false);
+            });
+        };
     }, []);
 
     useEffect(() => {
@@ -249,7 +248,7 @@ const ChatArea = () => {
         }
     };
 
-    const handleShowEmojiPicker = (e: any) => {
+    const handleShowEmojiPicker = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
         setShowEmoji(!showEmoji);
     };
@@ -257,10 +256,13 @@ const ChatArea = () => {
     const handleStopPropagation = (e: any) => {
         e.stopPropagation();
     };
+    console.log(showEmoji);
     return (
         <div
             id="chatArea"
-            className={`${styles.ChatArea} ${theme === "dark" && styles.ChatAreaDark}`}
+            className={`${styles.ChatArea}  bg-[#F3F4F6] ${
+                theme === "dark" && styles.ChatAreaDark
+            }`}
         >
             {conversationSelected === null && (
                 <div className={styles.chatOnboard}>{i18n._("Select a conversation to chat")}</div>
@@ -275,9 +277,16 @@ const ChatArea = () => {
                 </div>
             )}
             {conversationSelected && (
-                <div id="inputArea" className={styles.inputArea} ref={inputAreaElement}>
+                <div
+                    id="inputArea"
+                    className={`${styles.inputArea} bg-[#F3F4F6]`}
+                    ref={inputAreaElement}
+                >
                     <IconTopInputArea />
-                    <div className={styles.containerEmojiPicker} onClick={handleStopPropagation}>
+                    <div
+                        className={`${styles.containerEmojiPicker}`}
+                        onClick={handleStopPropagation}
+                    >
                         {showEmoji && (
                             <EmojiPicker onEmojiClick={handleEmojiClick} autoFocusSearch={false} />
                         )}
@@ -302,7 +311,12 @@ const ChatArea = () => {
                         ></div>
 
                         <div id="rightInput" className={styles.rightInputArea}>
-                            <div className={styles.buttonShowEmoji} onClick={handleShowEmojiPicker}>
+                            <div
+                                className={styles.buttonShowEmoji}
+                                onClick={(e) => {
+                                    handleShowEmojiPicker(e);
+                                }}
+                            >
                                 <IconMoodSmile />
                             </div>
                             <div className={styles.btnSend} onClick={handleClickSendIcon}>

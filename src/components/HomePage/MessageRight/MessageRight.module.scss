@@ -27,17 +27,18 @@
 .messageRight {
     display: flex;
     justify-content: flex-end;
+    color: #fff;
 
     .containerFileRight {
-        background-color: #BFDCC8;
+        background-color: $bg-message-right;
+        border-radius: 5px;
     }
 
     .content {
         word-wrap: break-word;
-        padding: 10px 20px;
-        background-color: #BFDCC8;
+        padding: 5px 10px;
+        background-color: $bg-message-right;
         border-radius: 5px;
-
     }
 
     .contentImage {
