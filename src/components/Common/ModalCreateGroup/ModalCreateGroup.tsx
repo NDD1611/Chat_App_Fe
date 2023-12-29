@@ -6,10 +6,10 @@ import { Avatar } from "@mantine/core";
 import { IconCircle, IconCircleCheck, IconCircleX } from "@tabler/icons-react";
 import { useLingui } from "@lingui/react";
 import { Button, Modal } from "@mantine/core";
-import { createGroupApi } from "@/api/api";
 import { toastMessage } from "@/utils/toast.util";
 import { toast } from "react-toastify";
 import { RootState } from "@/redux/store";
+import { createGroupApi } from "@/api/conversation";
 const ModalCreateGroup = () => {
     let i18n = useLingui();
     const listFriends = useSelector((state: RootState) => state.friend.listFriends);
@@ -75,13 +75,14 @@ const ModalCreateGroup = () => {
                 participants: listIds,
                 leaderId: userDetails._id,
             };
-            console.log(data);
-            let res: any = await createGroupApi(data);
+            let response: any = await createGroupApi(data);
             handleCloseModalCreateGroup();
-            if (res.err) {
-                toast.error(toastMessage(res?.exception?.response?.data?.code, i18n));
+            if (response.error) {
+                toast.error(
+                    toastMessage(response?.exception?.response?.data?.metadata?.code, i18n),
+                );
             } else {
-                toast.success(toastMessage(res?.response?.data?.code, i18n));
+                toast.success(toastMessage(response?.data?.metadata?.code, i18n));
             }
         } else {
             alert(i18n._("Type in the group name and choose at least two friends"));

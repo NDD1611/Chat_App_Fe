@@ -1,4 +1,14 @@
 {
+  "Friends List": "Friends List",
+  "You don't have friends yet, connect with friends": "You don't have friends yet, connect with friends",
+  "Watch information": "Watch information",
+  "Delete": "Delete",
+  "Friend request": "Friend request",
+  "You don't have any friend requests": "You don't have any friend requests",
+  "Refuse": "Refuse",
+  "Accept": "Accept",
+  "Register failed!": "Register failed!",
+  "Register successfully!": "Register successfully!",
   "Type in the group name and choose at least two friends": "Type in the group name and choose at least two friends",
   "Create group": "Create group",
   "Group name": "Group name",
@@ -65,14 +75,5 @@
   "received": "received",
   "watched": "watched",
   "Email is already in use!": "Email is already in use!",
-  "Account registration successful!": "Account registration successful!",
-  "An error occurred. Please try again later!": "An error occurred. Please try again later!",
-  "Email is incorrect!": "Email is incorrect!",
-  "Incorrect password!": "Incorrect password!",
-  "You have sent a friend request before!": "You have sent a friend request before!",
-  "You have received a friend request from this person before!": "You have received a friend request from this person before!",
-  "sent friend request successfully!": "sent friend request successfully!",
-  "Delete friends successfully!": "Delete friends successfully!",
-  "Email account not registered!": "Email account not registered!",
-  "Create group successfully!": "Create group successfully!"
+  "An error occurred. Please try again later!": "An error occurred. Please try again later!"
 }

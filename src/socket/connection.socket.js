@@ -8,9 +8,11 @@ import api from "../api/api";
 
 export let socket = null;
 export const socketConnectToServer = (userDetails) => {
+    const tokensJson = localStorage.getItem("tokens");
+    const tokens = tokensJson ? JSON.parse(tokensJson) : null;
     socket = io(process.env.NEXT_PUBLIC_BACKEND_URL, {
         auth: {
-            token: userDetails.token,
+            accessToken: tokens.accessToken,
             userDetails: userDetails,
         },
     });

@@ -13,6 +13,7 @@ import { Avatar } from "@mantine/core";
 import { RootState } from "@/redux/store";
 import { useCurrentLocale } from "next-i18n-router/client";
 import i18nConfig from "../../../../i18nConfig";
+import { deleteConversation } from "@/api/conversation";
 export const Conversation = ({ conversation }: { conversation: any }) => {
     let i18n = useLingui();
     const userDetails = useSelector((state: RootState) => state.auth.userDetails);
@@ -170,13 +171,13 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
         };
     });
 
-    const deleteConversation = async (e: any) => {
+    const handleDeleteConversation = async (e: any) => {
         e.stopPropagation();
-        let res: any = await api.deleteConversation({ conversationId: conversation._id });
-        if (res.err) {
-            console.log(res, "err");
+        let response: any = await deleteConversation({ conversationId: conversation._id });
+        if (response.error) {
+            console.log(response, "err");
         } else {
-            console.log(res);
+            console.log(response);
         }
     };
     return (
@@ -266,7 +267,7 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
                         <Menu.Item
                             color="red"
                             leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
-                            onClick={deleteConversation}
+                            onClick={handleDeleteConversation}
                         >
                             {i18n._("Delete conversation")}
                         </Menu.Item>

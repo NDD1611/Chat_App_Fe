@@ -28,7 +28,6 @@ export const MessageEmoji = ({ text }: { text: any }) => {
         <>
             <div>
                 {listContents.map((content: any, index: any) => {
-                    console.log(content);
                     if (content !== "") {
                         if (content.includes("&#x")) {
                             let newContent = content.slice(3, 8);

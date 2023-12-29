@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { tabsActions } from "@/redux/actions/tabsAction";
-import api from "@/api/api";
 import { conversationActions } from "@/redux/actions/conversationAction";
 import { useRouter } from "next/navigation";
 import { useLingui } from "@lingui/react";
@@ -14,6 +13,7 @@ import { toastMessage } from "@/utils/toast.util";
 import { RootState } from "@/redux/store";
 import i18nConfig from "../../../../i18nConfig";
 import { useCurrentLocale } from "next-i18n-router/client";
+import { deleteFriend } from "@/api/friend";
 
 export const ListFriend = () => {
     let i18n = useLingui();
@@ -86,13 +86,13 @@ export const ListFriend = () => {
             userId: userDetails._id,
             friendId: friendId,
         };
-        let res: any = await api.deleteFriend(data);
-        if (res.err) {
+        let response: any = await deleteFriend(data);
+        if (response.error) {
             setShowLoader(false);
-            toast.error(toastMessage(res?.exception?.response?.data?.code, i18n));
+            toast.error(toastMessage(response?.exception?.response?.data?.metadata?.code, i18n));
         } else {
             setShowLoader(false);
-            toast.success(toastMessage(res?.response?.data?.code, i18n));
+            toast.success(toastMessage(response?.data?.metadata?.code, i18n));
         }
         setShowLoader(false);
     };

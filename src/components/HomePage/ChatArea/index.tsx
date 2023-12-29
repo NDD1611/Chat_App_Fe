@@ -12,6 +12,7 @@ import { useLingui } from "@lingui/react";
 import { IconMoodSmile, IconSend } from "@tabler/icons-react";
 import { RootState } from "@/redux/store";
 import EmojiPicker from "emoji-picker-react";
+import { createNewConversation } from "@/api/conversation";
 
 const ChatArea = () => {
     const { i18n } = useLingui();
@@ -169,7 +170,7 @@ const ChatArea = () => {
                 });
                 sendMessage(data);
             } else {
-                let response: any = await api.createNewConversation({
+                let response: any = await createNewConversation({
                     sender: {
                         _id: senderId,
                     },
@@ -180,10 +181,10 @@ const ChatArea = () => {
                     status: "0", //0: dang gui, 1: da gui, 2: da nhan, 3: da xem.
                 });
 
-                if (response.err) {
+                if (response.error) {
                     alert(i18n._("An error occurred. Please try again later."));
                 } else {
-                    let { conversation } = response?.data;
+                    let { conversation } = response?.data?.metadata;
                     dispatch({
                         type: conversationActions.SET_SELECT_CONVERSATION,
                         conversationSelected: conversation,
@@ -256,7 +257,6 @@ const ChatArea = () => {
     const handleStopPropagation = (e: any) => {
         e.stopPropagation();
     };
-    console.log(showEmoji);
     return (
         <div
             id="chatArea"

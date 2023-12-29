@@ -15,6 +15,8 @@ import { socket, socketConnectToServer } from "@/socket/connection.socket";
 import "@/styles/global.module.scss";
 import "@/app/globals.css";
 import "@mantine/core/styles.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 i18n.load({
     en: messagesEn,
@@ -50,6 +52,7 @@ export const MainProvider = ({ children }: { children: React.ReactNode }) => {
                         <ColorSchemeScript />
                     </Head>
                     {children}
+                    <ToastContainer />
                 </Provider>
             </I18nProvider>
         </MantineProvider>

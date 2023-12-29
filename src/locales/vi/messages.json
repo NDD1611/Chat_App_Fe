@@ -1,6 +1,15 @@
 {
+    "Friends List": "",
+    "You don't have friends yet, connect with friends": "",
+    "Watch information": "",
+    "Delete": "",
+    "Friend request": "",
+    "You don't have any friend requests": "",
+    "Refuse": "",
+    "Accept": "",
+    "Register failed!": "",
+    "Register successfully!": "Đăng kí thành công!",
     "Gender": "Giới tính",
-    "Create group successfully!": "Tạo nhóm thành công",
     "Type in the group name and choose at least two friends": "Nhập tên nhóm và chọn ít nhất 2 thành viên",
     "Create group": "Tạo nhóm",
     "Group name": "Tên nhóm",
@@ -66,13 +75,5 @@
     "received": "Đã nhận",
     "watched": "Đã xem",
     "Email is already in use!": "Email đã được sử dụng!",
-    "Account registration successful!": "Đăng kí tài khoản thành công!",
-    "An error occurred. Please try again later!": "Đã xảy ra lỗi. Vui lòng thử lại sau!",
-    "Email is incorrect!": "Email không chính xác!",
-    "Incorrect password!": "Mật khẩu không chính xác!",
-    "You have sent a friend request before!": "Bạn đã gửi yêu cầu kết bạn trước đây!",
-    "You have received a friend request from this person before!": "Bạn đã nhận được yêu cầu kết bạn từ người này trước đây!",
-    "sent friend request successfully!": "Đã gửi yêu cầu kết bạn thành công!",
-    "Delete friends successfully!": "Xóa bạn thành công!",
-    "Email account not registered!": "Email chưa đăng kí tài khoản!"
+    "An error occurred. Please try again later!": "Đã xảy ra lỗi. Vui lòng thử lại sau!"
 }

@@ -14,6 +14,7 @@ import { RootState } from "@/redux/store";
 import { Avatar } from "@mantine/core";
 import { useCurrentLocale } from "next-i18n-router/client";
 import i18nConfig from "../../../../i18nConfig";
+import { findFriend, friendInvitation } from "@/api/friend";
 
 export const ModalFindFriend = () => {
     let i18n = useLingui();
@@ -33,17 +34,17 @@ export const ModalFindFriend = () => {
         const userDetailsJson = localStorage.getItem("userDetails");
         const userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
         setShowLoader(true);
-        const res: any = await api.friendInvitation({
+        const response: any = await friendInvitation({
             senderId: userDetails._id,
             receiverId: infoFindFriend._id,
         });
-        if (res.err) {
+        if (response.error) {
             setShowLoader(false);
-            toast.error(toastMessage(res?.exception?.response?.data?.code, i18n));
+            toast.error(toastMessage(response?.exception?.response?.data?.metadata?.code, i18n));
             dispatch({ type: modalActions.SET_HIDE_MODAL_FIND_FRIEND });
         } else {
             setShowLoader(false);
-            toast.success(toastMessage(res?.response?.data?.code, i18n));
+            toast.success(toastMessage(response?.data?.metadata?.code, i18n));
             dispatch({ type: modalActions.SET_HIDE_MODAL_FIND_FRIEND });
         }
         setInfoFindFriend(undefined);
@@ -60,18 +61,20 @@ export const ModalFindFriend = () => {
             dispatch({ type: modalActions.SET_HIDE_MODAL_FIND_FRIEND });
         } else {
             setShowLoader(true);
-            const res: any = await api.findFriend({ email: email });
-            if (res.err) {
-                toast.error(toastMessage(res?.exception?.response?.data?.code, i18n));
+            const response: any = await findFriend({ email: email });
+            if (response.error) {
+                toast.error(
+                    toastMessage(response?.exception?.response?.data?.metadata?.code, i18n),
+                );
             } else {
-                let userFind = res?.response?.data;
-                let date = new Date(userFind.birthday);
+                let { userData } = response?.data?.metadata;
+                let date = new Date(userData.birthday);
                 let day = date.getDate().toString();
                 let month = (date.getMonth() + 1).toString();
                 let year = date.getFullYear();
                 let birthday = day + "/" + `${parseInt(month) < 10 ? 0 : ""}` + month + "/" + year;
                 setInfoFindFriend({
-                    ...userFind,
+                    ...userData,
                     birthday,
                 });
 
@@ -79,7 +82,7 @@ export const ModalFindFriend = () => {
                 let check = false;
                 if (listFriends) {
                     listFriends.forEach((friend: any) => {
-                        if (friend._id == userFind._id) {
+                        if (friend._id == userData._id) {
                             check = true;
                         }
                     });
@@ -182,6 +185,7 @@ export const ModalFindFriend = () => {
                                 <Avatar
                                     src={infoFindFriend.avatar ? infoFindFriend.avatar : ""}
                                     size={"lg"}
+                                    bg={"#fff"}
                                 ></Avatar>
                             </div>
                         </div>

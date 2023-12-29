@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./index.module.scss";
-import api from "@/api/api";
 import { tabsActions } from "@/redux/actions/tabsAction";
 import { useLingui } from "@lingui/react";
 import { Button, Avatar } from "@mantine/core";
@@ -10,6 +9,7 @@ import { RootState } from "@/redux/store";
 import { IconChevronLeft, IconMailOpened } from "@tabler/icons-react";
 import i18nConfig from "../../../../i18nConfig";
 import { useCurrentLocale } from "next-i18n-router/client";
+import { acceptInvitation, rejectInvitation } from "@/api/friend";
 
 export const PendingInvitation = () => {
     let i18n = useLingui();
@@ -20,13 +20,14 @@ export const PendingInvitation = () => {
     const [showBackButton, setShowBackButton] = useState(false);
     const dispatch = useDispatch();
     const handleRejectFriend = async (invitation: any) => {
+        let data = { invitationId: invitation._id, receiverId: invitation.receiver };
         setShowLoader(true);
-        const response = await api.rejectInvitation(invitation);
+        const response = await rejectInvitation(data);
         setShowLoader(false);
     };
     const handleAcceptFriend = async (invitation: any) => {
         setShowLoader(true);
-        const response = await api.acceptInvitation({ invitationId: invitation._id });
+        const response = await acceptInvitation({ invitationId: invitation._id });
         setShowLoader(false);
         router.push(`/${locale}`);
     };
@@ -87,9 +88,9 @@ export const PendingInvitation = () => {
                                         size={40}
                                     />
                                     <p className={styles.name}>
-                                        {invitation.senderId.lastName +
+                                        {invitation.sender.lastName +
                                             " " +
-                                            invitation.senderId.firstName}
+                                            invitation.sender.firstName}
                                     </p>
                                 </div>
                                 <div className={styles.bottomItem}>

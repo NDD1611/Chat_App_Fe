@@ -1,7 +1,6 @@
 import styles from "./IconTopInputArea.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { conversationActions } from "@/redux/actions/conversationAction";
-import api from "@/api/api";
 import { sendMessage, sendMessageGroup } from "@/socket/connection.socket";
 import { toast } from "react-toastify";
 import { initializeApp } from "firebase/app";
@@ -12,6 +11,7 @@ import { IconPaperclip, IconPhoto } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { RootState } from "@/redux/store";
 import { firebaseConfig } from "@/firebase/firebase.config";
+import { createConversation } from "@/api/conversation";
 export const IconTopInputArea = () => {
     let i18n = useLingui();
     const dispatch = useDispatch();
@@ -120,14 +120,14 @@ export const IconTopInputArea = () => {
                     },
                 );
             } else {
-                let res: any = await api.createConversation({
+                let response: any = await createConversation({
                     senderId: userDetails._id,
                     receiverId: receiverUser._id,
                 });
-                if (res.err) {
+                if (response.error) {
                     toast.error(i18n._("An error occurred. Please try again later."));
                 } else {
-                    let { conversation } = res.data;
+                    let { conversation } = response?.data?.metadata;
                     for (let index in conversation.participants) {
                         if (conversation.participants[index] == userDetails._id) {
                             conversation.participants[index] = userDetails;
@@ -329,14 +329,14 @@ export const IconTopInputArea = () => {
                     },
                 );
             } else {
-                let res: any = await api.createConversation({
+                let response: any = await createConversation({
                     senderId: userDetails._id,
                     receiverId: receiverUser._id,
                 });
-                if (res.err) {
+                if (response.error) {
                     toast.error(i18n._("An error occurred. Please try again later."));
                 } else {
-                    let { conversation } = res.data;
+                    let { conversation } = response?.data?.metadata;
                     for (let index in conversation.participants) {
                         if (conversation.participants[index] == userDetails._id) {
                             conversation.participants[index] = userDetails;

@@ -12,6 +12,7 @@ import { useLingui } from "@lingui/react";
 import { IconChevronLeft, IconUserPlus } from "@tabler/icons-react";
 import { toastMessage } from "@/utils/toast.util";
 import { RootState } from "@/redux/store";
+import { friendInvitation } from "@/api/friend";
 export const HeaderChatArea = () => {
     let i18n = useLingui();
     const dispatch = useDispatch();
@@ -76,17 +77,17 @@ export const HeaderChatArea = () => {
         let userDetailsJson = localStorage.getItem("userDetails");
         let userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
         setShowLoader(true);
-        const res: any = await api.friendInvitation({
+        const response: any = await friendInvitation({
             senderId: userDetails._id,
             receiverId: receiverUser._id,
         });
-        if (res.err) {
+        if (response.error) {
             setShowLoader(false);
-            toast.error(toastMessage(res?.exception?.response?.data?.code, i18n));
+            toast.error(toastMessage(response?.exception?.response?.data?.metadata?.code, i18n));
             dispatch({ type: modalActions.SET_HIDE_MODAL_FIND_FRIEND });
         } else {
             setShowLoader(false);
-            toast.success(toastMessage(res?.response?.data?.code, i18n));
+            toast.success(toastMessage(response?.data?.metadata?.code, i18n));
             dispatch({ type: modalActions.SET_HIDE_MODAL_FIND_FRIEND });
         }
     };
