@@ -92,14 +92,14 @@ const ChatArea = () => {
             messageArea.style.height = height - 5 + "px";
         }
 
-        let chatAreaElement = document.getElementById("chatArea");
-        let rightInputElement = document.getElementById("rightInput");
-        let divInputElement = document.getElementById("divInput");
+        // let chatAreaElement = document.getElementById("chatArea");
+        // let rightInputElement = document.getElementById("rightInput");
+        // let divInputElement = document.getElementById("divInput");
 
-        if (chatAreaElement && rightInputElement && divInputElement) {
-            let widthInput = chatAreaElement.clientWidth - rightInputElement.clientWidth;
-            divInputElement.style.width = widthInput - 5 + "px";
-        }
+        // if (chatAreaElement && rightInputElement && divInputElement) {
+        //     let widthInput = chatAreaElement.clientWidth - rightInputElement.clientWidth;
+        //     divInputElement.style.width = widthInput - 5 + "px";
+        // }
     });
     const handleEmojiClick = (event: any) => {
         let divInput = document.getElementById("divInput");
@@ -258,30 +258,23 @@ const ChatArea = () => {
         e.stopPropagation();
     };
     return (
-        <div
-            id="chatArea"
-            className={`${styles.ChatArea}  bg-[#F3F4F6] ${
-                theme === "dark" && styles.ChatAreaDark
-            }`}
-        >
+        <div id="chatArea" className={styles.ChatArea}>
             {conversationSelected === null && (
-                <div className={styles.chatOnboard}>{i18n._("Select a conversation to chat")}</div>
+                <div className={styles.chatOnboard}>
+                    <div>{i18n._("Select a conversation to chat")}</div>
+                </div>
             )}
             <div id="headerContainer" ref={headerElement}>
                 <HeaderChatArea />
             </div>
 
             {conversationSelected && (
-                <div ref={chatMessageElement} id="chatMessageArea" className={styles.chatMessage}>
+                <div ref={chatMessageElement} id="chatMessageArea">
                     <MessageArea />
                 </div>
             )}
             {conversationSelected && (
-                <div
-                    id="inputArea"
-                    className={`${styles.inputArea} bg-[#F3F4F6]`}
-                    ref={inputAreaElement}
-                >
+                <div id="inputArea" className={`${styles.inputArea}`} ref={inputAreaElement}>
                     <IconTopInputArea />
                     <div
                         className={`${styles.containerEmojiPicker}`}

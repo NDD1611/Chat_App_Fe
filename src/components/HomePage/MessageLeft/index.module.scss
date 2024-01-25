@@ -1,17 +1,27 @@
 .messageLeft {
     padding-top: 5px;
 
+    .containerLeft {
+        display: flex;
+        justify-content: center;
+        padding: 0 5px;
+        padding-top: 5px;
+        width: 40px;
+        margin-right: 5px;
+    }
+
     .content {
         padding: 5px 10px;
-        background-color: #D1D5DB;
+        background-color: #ECECEC;
         border-radius: 5px;
-        word-wrap: break-word;
-
+        width: fit-content;
+        max-width: 75%;
     }
 
     .containerFileLeft {
         border-radius: 5px;
         background-color: #D1D5DB;
+
     }
 
     .footerDate {
@@ -30,6 +40,7 @@
         border-radius: 15px;
 
         .messageImage {
+            max-width: 75%;
 
             img {
                 width: 100%;

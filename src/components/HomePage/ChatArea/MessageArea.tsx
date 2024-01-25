@@ -8,7 +8,7 @@ import { MessageLeft } from "../MessageLeft";
 import { MessageRight } from "../MessageRight/MessageRight";
 import { messageActions } from "@/redux/actions/messageActions";
 import { useLingui } from "@lingui/react";
-import { Avatar } from "@mantine/core";
+import { Avatar, Divider } from "@mantine/core";
 import { RootState } from "@/redux/store";
 import { useCurrentLocale } from "next-i18n-router/client";
 import i18nConfig from "../../../../i18nConfig";
@@ -99,125 +99,109 @@ export const MessageArea = () => {
             clearTimeout(id);
         };
     });
-    return (
-        <>
-            <div
-                id="messageArea"
-                className={`${styles.messageArea} bg-[#F3F4F6] ${
-                    theme === "dark" && styles.messageAreaDark
-                }`}
-                ref={messageAreaElement}
-            >
-                <div style={{ height: "30px" }}></div>
-                {messages &&
-                    messages.map((message: any, index: any) => {
-                        if (message.type === "accept_friend") {
-                            if (message.sender._id === userDetails._id) {
-                                return (
-                                    <div key={message._id}>
-                                        {message.sameDay === false && (
-                                            <div className={styles.dateShow}>
-                                                <p>{message.dateShow} </p>
-                                            </div>
-                                        )}
-                                        <div className={styles.acceptFriend}>
-                                            <Avatar src={receiverUser?.avatar} size={"md"} />
-                                            <p>
-                                                {receiverUser?.firstName +
-                                                    " " +
-                                                    receiverUser?.lastName}
-                                            </p>
-                                            <p> {i18n._("has agreed to make friends")}</p>
-                                        </div>
-                                    </div>
-                                );
-                            } else {
-                                return (
-                                    <div key={message._id}>
-                                        {message.sameDay === false && (
-                                            <div className={styles.dateShow}>
-                                                <p>{message.dateShow}</p>
-                                            </div>
-                                        )}
-                                        <div className={styles.acceptFriend}>
-                                            <p>{i18n._("you just made friends with")}</p>
-                                            <Avatar src={message?.sender?.avatar} size={"md"} />
-                                            <p>
-                                                {message?.sender
-                                                    ? message?.sender?.firstName +
-                                                      " " +
-                                                      message?.sender?.lastName
-                                                    : ""}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            }
-                        }
-                        if (message.type === "create_group") {
-                            if (message.sender._id === userDetails._id) {
-                                return (
-                                    <div key={message._id}>
-                                        {message.sameDay === false && (
-                                            <div className={styles.dateShow}>
-                                                <p>{message.dateShow} </p>
-                                            </div>
-                                        )}
-                                        <div className={styles.acceptFriend}>
-                                            <p>
-                                                {" "}
-                                                {i18n._("You have successfully created the group")}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            } else {
-                                return (
-                                    <div key={message._id}>
-                                        {message.sameDay === false && (
-                                            <div className={styles.dateShow}>
-                                                <p>{message.dateShow}</p>
-                                            </div>
-                                        )}
-                                        <div className={styles.acceptFriend}>
-                                            <p>{i18n._("You have just been added to the group")}</p>
-                                        </div>
-                                    </div>
-                                );
-                            }
-                        }
 
+    return (
+        <div id="messageArea" className={styles.messageArea} ref={messageAreaElement}>
+            <div style={{ height: "30px" }}></div>
+            {messages &&
+                messages.map((message: any, index: number) => {
+                    if (message.type === "accept_friend") {
                         if (message.sender._id === userDetails._id) {
                             return (
                                 <div key={message._id}>
-                                    <MessageRight message={message} />
+                                    {message.sameDay === false && (
+                                        <Divider label={message.dateShow} />
+                                    )}
+                                    <div className={styles.acceptFriend}>
+                                        <Avatar
+                                            src={receiverUser?.avatar}
+                                            size={"md"}
+                                            bg={"#fff"}
+                                        />
+                                        <p>
+                                            {receiverUser?.firstName + " " + receiverUser?.lastName}
+                                        </p>
+                                        <p> {i18n._("has agreed to make friends")}</p>
+                                    </div>
                                 </div>
                             );
                         } else {
                             return (
                                 <div key={message._id}>
                                     {message.sameDay === false && (
-                                        <div className={styles.dateShow}>
-                                            <p>{message.dateShow}</p>
-                                        </div>
+                                        <Divider label={message.dateShow} />
                                     )}
-                                    <div className={styles.containerMessageLeft}>
-                                        <div className={styles.containerLeft}>
-                                            {(message.sameAuth === false ||
-                                                message.sameDay === false ||
-                                                (index == 0 &&
-                                                    message?.sender?._id != userDetails._id)) && (
-                                                <Avatar src={message?.sender?.avatar} size={"sm"} />
-                                            )}
-                                        </div>
-                                        <MessageLeft message={message} />
+                                    <div className={styles.acceptFriend}>
+                                        <p>{i18n._("you just made friends with")}</p>
+                                        <Avatar src={message?.sender?.avatar} size={"md"} />
+                                        <p>
+                                            {message?.sender
+                                                ? message?.sender?.firstName +
+                                                  " " +
+                                                  message?.sender?.lastName
+                                                : ""}
+                                        </p>
                                     </div>
                                 </div>
                             );
                         }
-                    })}
-                <div style={{ height: "20px" }}></div>
-            </div>
-        </>
+                    }
+                    if (message.type === "create_group") {
+                        if (message.sender._id === userDetails._id) {
+                            return (
+                                <div key={message._id}>
+                                    {message.sameDay === false && (
+                                        <Divider label={message.dateShow} />
+                                    )}
+                                    <div className={styles.acceptFriend}>
+                                        <p> {i18n._("You have successfully created the group")}</p>
+                                    </div>
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div key={message._id}>
+                                    {message.sameDay === false && (
+                                        <Divider label={message.dateShow} />
+                                    )}
+                                    <div className={styles.acceptFriend}>
+                                        <p>{i18n._("You have just been added to the group")}</p>
+                                    </div>
+                                </div>
+                            );
+                        }
+                    }
+
+                    if (message.sender._id === userDetails._id) {
+                        return (
+                            <div key={message._id}>
+                                <MessageRight message={message} />
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <div key={message._id}>
+                                {message.sameDay === false && <Divider label={message.dateShow} />}
+                                <div className={styles.containerMessageLeft}>
+                                    <div className={styles.containerLeft}>
+                                        {(message.sameAuth === false ||
+                                            message.sameDay === false ||
+                                            (index == 0 &&
+                                                message?.sender?._id != userDetails._id)) && (
+                                            <Avatar
+                                                src={message?.sender?.avatar}
+                                                style={{ backgroundColor: "#fff" }}
+                                                size={"md"}
+                                            />
+                                        )}
+                                    </div>
+                                    <MessageLeft message={message} />
+                                </div>
+                            </div>
+                        );
+                    }
+                })}
+            <div style={{ height: "20px" }}></div>
+        </div>
     );
 };

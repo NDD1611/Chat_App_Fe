@@ -179,7 +179,9 @@ export const ListFriend = () => {
                             <p>{i18n._("Sex")}</p>
                             <p>
                                 {infoFriend &&
-                                    (infoFriend.sex ? infoFriend.sex : i18n._("No information"))}
+                                    (infoFriend.gender
+                                        ? infoFriend.gender
+                                        : i18n._("No information"))}
                             </p>
                         </div>
                         <div>

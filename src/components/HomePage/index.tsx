@@ -7,6 +7,7 @@ import HeaderTabTwo from "../Common/TabTwo/HeaderTabTwo";
 import { ConversationList } from "./ConversationList";
 import { TabThree } from "../Common/TabThree";
 import ChatArea from "./ChatArea";
+import classes from "./index.module.scss";
 export const HomePages = () => {
     const [render, setRender] = useState<Boolean>(false);
 
@@ -21,15 +22,21 @@ export const HomePages = () => {
     }, []);
     if (render)
         return (
-            <div id="dashboard" className="flex h-screen w-screen">
-                <Navbar></Navbar>
-                <TabTwo>
-                    <HeaderTabTwo />
-                    <ConversationList />
-                </TabTwo>
-                <TabThree>
-                    <ChatArea></ChatArea>
-                </TabThree>
+            <div id="dashboard" className={classes.chatPage}>
+                <div className={classes.navBar}>
+                    <Navbar></Navbar>
+                </div>
+                <div className={classes.conversation}>
+                    <TabTwo>
+                        <HeaderTabTwo />
+                        <ConversationList />
+                    </TabTwo>
+                </div>
+                <div className={classes.chatArea}>
+                    <TabThree>
+                        <ChatArea></ChatArea>
+                    </TabThree>
+                </div>
             </div>
         );
 };

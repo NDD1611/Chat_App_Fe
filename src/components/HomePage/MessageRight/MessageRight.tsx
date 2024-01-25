@@ -7,43 +7,19 @@ import { RootState } from "@/redux/store";
 import { FileMessage } from "../FileMessage";
 
 const Content = ({ message }: { message: any }) => {
-    const maxWidth = useSelector((state: RootState) => state.message.maxWidth);
-    const [widthImg, setWidthImg] = useState(0);
-    const handleLoadImg = (e: any) => {
-        let img = e.target;
-        let widthImg = img.naturalWidth * 0.3;
-        // let heightImg = img.naturalHeight * 0.3
-        if (widthImg > maxWidth) {
-            setWidthImg(maxWidth);
-        } else if (widthImg < 200) {
-            setWidthImg(widthImg * 2);
-        } else {
-            setWidthImg(widthImg);
-        }
-    };
-
     if (message.type == "text") {
         return (
-            <div className={styles.content} style={{ maxWidth: maxWidth + "px" }}>
+            <div className={styles.content}>
                 <MessageEmoji text={message.content} />
             </div>
         );
     } else if (message.type == "image") {
         return (
             <div className={styles.contentImage}>
-                <div
-                    className={styles.messageImage}
-                    style={{ maxWidth: widthImg + "px", maxHeight: "500px" }}
-                >
-                    <img onLoad={handleLoadImg} src={message.content} />
+                <div className={styles.messageImage}>
+                    <img src={message.content} />
                     {message.status == "0" && (
                         <div className={styles.loaderImage}>
-                            {/* <Oval
-                            width={50}
-                            height={50}
-                            color="#0062cc"
-                            secondaryColor="#ccc"
-                        /> */}
                             <div className={styles.backgroundImageLoader}></div>
                             <div
                                 className={styles.circularProgress}
@@ -62,11 +38,7 @@ const Content = ({ message }: { message: any }) => {
             </div>
         );
     } else {
-        return (
-            <div className={styles.containerFileRight}>
-                <FileMessage message={message} />
-            </div>
-        );
+        return <FileMessage message={message} bgColor="#0A7CFF" />;
     }
 };
 
@@ -80,9 +52,7 @@ export const MessageRight = ({ message }: { message: any }) => {
                 </div>
             )}
             {message.sameAuth == false && <div style={{ height: "10px" }}></div>}
-            <div
-                className={`${styles.messageRight} ${theme === "dark" && styles.messageRightDark}`}
-            >
+            <div className={styles.messageRight}>
                 <Content message={message} />
             </div>
             <div className={`${styles.footerDate} ${theme === "dark" && styles.footerDateDark}`}>

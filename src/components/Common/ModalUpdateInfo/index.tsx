@@ -300,17 +300,17 @@ export const ModalUpdateInfo = () => {
                     </div>
                     <div className={styles.userInfo}>
                         <p className={styles.titleInfo}>{i18n._("Information")}</p>
-                        <div className={styles.sexContainer}>
-                            <p className={styles.sex}>{i18n._("Sex") + ":"}</p>
+                        <div className={styles.genderContainer}>
+                            <p className={styles.gender}>{i18n._("Gender") + ":"}</p>
                             <div className={styles.inputRadio}>
                                 <input
                                     type="radio"
                                     id="male"
                                     name="sex"
                                     value="Nam"
-                                    checked={userDetails.sex === "Nam" ? true : false}
+                                    checked={userDetails.gender === "Nam" ? true : false}
                                     onChange={() => {
-                                        setUserDetails({ ...userDetails, sex: "Nam" });
+                                        setUserDetails({ ...userDetails, gender: "Nam" });
                                     }}
                                 />
                                 <label htmlFor="male">{i18n._("Male")}</label>
@@ -319,9 +319,9 @@ export const ModalUpdateInfo = () => {
                                     id="Female"
                                     name="sex"
                                     value="Nữ"
-                                    checked={userDetails.sex === "Nữ" ? true : false}
+                                    checked={userDetails.gender === "Nữ" ? true : false}
                                     onChange={() => {
-                                        setUserDetails({ ...userDetails, sex: "Nữ" });
+                                        setUserDetails({ ...userDetails, gender: "Nữ" });
                                     }}
                                 />
                                 <label htmlFor="Female">{i18n._("Female")}</label>

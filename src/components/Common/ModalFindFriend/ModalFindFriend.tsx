@@ -181,7 +181,7 @@ export const ModalFindFriend = () => {
                     <div className={styles.contentModalInfo}>
                         <div className={styles.image}>
                             <img src="/images/backgroundProfile.jpg" />
-                            <div className="w-full absolute flex justify-center -bottom-[25px]">
+                            <div className={styles.AvatarContainer}>
                                 <Avatar
                                     src={infoFindFriend.avatar ? infoFindFriend.avatar : ""}
                                     size={"lg"}
@@ -189,7 +189,7 @@ export const ModalFindFriend = () => {
                                 ></Avatar>
                             </div>
                         </div>
-                        <p className="text-center pt-[40px]">
+                        <p className={styles.userName}>
                             {infoFindFriend.firstName + " " + infoFindFriend.lastName}
                         </p>
 
@@ -212,10 +212,10 @@ export const ModalFindFriend = () => {
                                 <p>{infoFindFriend.email}</p>
                             </div>
                             <div>
-                                <p>{i18n._("Sex")}</p>
+                                <p>{i18n._("Gender")}</p>
                                 <p>
-                                    {infoFindFriend.sex
-                                        ? infoFindFriend.sex
+                                    {infoFindFriend.gender
+                                        ? infoFindFriend.gender
                                         : i18n._("No information")}
                                 </p>
                             </div>

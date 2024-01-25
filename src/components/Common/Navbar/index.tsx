@@ -97,7 +97,7 @@ export const Navbar = () => {
 
     if (showTabOne)
         return (
-            <nav className={`${classes.navbar}`}>
+            <nav className={classes.navbar}>
                 <ModalDisplayInfo />
                 <ModalUpdateInfo />
                 <Center>

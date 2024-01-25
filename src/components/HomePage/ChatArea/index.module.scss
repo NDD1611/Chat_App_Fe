@@ -6,7 +6,6 @@
     position: relative;
     margin: 0;
     font-size: 14px;
-    background-color: #F3F4F6;
 
     .iconTopDivInput {
         width: 10%;
@@ -21,17 +20,14 @@
         font-size: 30px;
     }
 
-    .chatMessage {
-        background-color: #eef0f1;
-    }
-
     .inputArea {
         position: relative;
 
         .mainInput {
             width: 100%;
             border-top: 1px solid #ccc;
-            display: flex;
+            display: grid;
+            grid-template-columns: auto 150px;
 
             .divInputFake {
                 padding: 15px;
@@ -105,7 +101,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 20px;
-                padding: 0 20px;
+                padding: 0 10px;
 
                 .buttonShowEmoji {
                     position: relative;

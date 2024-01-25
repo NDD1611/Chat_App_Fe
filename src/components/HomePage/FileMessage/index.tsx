@@ -9,7 +9,7 @@ import { IconDownload } from "@tabler/icons-react";
 import { Button } from "@mantine/core";
 import { firebaseConfig } from "@/firebase/firebase.config";
 
-export const FileMessage = ({ message }: { message: any }) => {
+export const FileMessage = ({ message, bgColor }: { message: any; bgColor: string }) => {
     const [fileName, setFileName] = useState("");
     const [fileSize, setFileSize] = useState("");
     const [fileSizeType, setFileSizeType] = useState("");
@@ -55,23 +55,25 @@ export const FileMessage = ({ message }: { message: any }) => {
         }
     };
     useLayoutEffect(() => {
-        let type = JSON.parse(message.type);
-        setFileName(type.name);
-        // calculator file size
-        if (type?.size) {
-            let { size, sizeType } = calcFileSize(type.size);
-            setFileSize(size);
-            setFileSizeType(sizeType);
-        }
-        // find .ext from file name
-        let name = type.name;
-        if (name) {
-            let ext = name.split(".").pop();
-            setExt(ext);
+        if (message.type) {
+            let type = JSON.parse(message.type);
+            setFileName(type.name);
+            // calculator file size
+            if (type?.size) {
+                let { size, sizeType } = calcFileSize(type.size);
+                setFileSize(size);
+                setFileSizeType(sizeType);
+            }
+            // find .ext from file name
+            let name = type.name;
+            if (name) {
+                let ext = name.split(".").pop();
+                setExt(ext);
+            }
         }
     }, []);
     return (
-        <div className={styles.contentFile}>
+        <div className={styles.contentFile} style={{ backgroundColor: `${bgColor}` }}>
             <div className={styles.iconFile}>
                 <PrepareIconFile ext={ext} />
             </div>

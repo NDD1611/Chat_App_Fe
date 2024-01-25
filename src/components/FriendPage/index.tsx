@@ -11,6 +11,7 @@ import { PendingInvitation } from "./PendingInvitation";
 import { ListFriend } from "./ListFriend";
 import { Navbar } from "@/components/Common/Navbar";
 import { RootState } from "@/redux/store";
+import classes from "./index.module.scss";
 
 export const FriendPage = () => {
     const dispatch = useDispatch();
@@ -30,16 +31,22 @@ export const FriendPage = () => {
         }
     }, []);
     return (
-        <div className="flex h-screen w-screen">
-            <Navbar></Navbar>
-            <TabTwo>
-                <HeaderTabTwo></HeaderTabTwo>
-                <MenuItemFriend></MenuItemFriend>
-            </TabTwo>
-            <TabThree>
-                {selectItem === "friendInvitation" && <PendingInvitation></PendingInvitation>}
-                {selectItem === "listFriend" && <ListFriend></ListFriend>}
-            </TabThree>
+        <div id="dashboard" className={classes.friendPage}>
+            <div className={classes.navBar}>
+                <Navbar></Navbar>
+            </div>
+            <div className={classes.conversation}>
+                <TabTwo>
+                    <HeaderTabTwo></HeaderTabTwo>
+                    <MenuItemFriend></MenuItemFriend>
+                </TabTwo>
+            </div>
+            <div className={classes.chatArea}>
+                <TabThree>
+                    {selectItem === "friendInvitation" && <PendingInvitation></PendingInvitation>}
+                    {selectItem === "listFriend" && <ListFriend></ListFriend>}
+                </TabThree>
+            </div>
         </div>
     );
 };
