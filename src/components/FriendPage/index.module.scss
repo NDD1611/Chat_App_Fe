@@ -2,4 +2,8 @@
     display: grid;
     height: 100vh;
     grid-template-columns: 70px 340px auto;
+
+    .friendList {
+        border-right: 1px solid #ccc;
+    }
 }

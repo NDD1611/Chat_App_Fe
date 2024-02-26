@@ -52,6 +52,7 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
             }
         }
     }, [message]);
+
     useEffect(() => {
         if (conversation?.participants?.length > 2) {
             setIsGroup(true);
@@ -59,6 +60,7 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
             setIsGroup(false);
         }
     }, []);
+
     useEffect(() => {
         const { participants, messages } = conversation;
         let friend: any = null;
@@ -70,61 +72,61 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
                 }
             });
         }
-        if (messages.length && friend) {
-            const lastMessage = messages[messages.length - 1];
-            if (lastMessage.type === "accept_friend") {
-                if (userDetails._id === lastMessage.sender._id) {
-                    let mesTemp =
-                        friend.firstName +
-                        " " +
-                        friend.lastName +
-                        " " +
-                        i18n._("has agreed to make friends");
-                    setMessage({ content: mesTemp, type: "text" });
-                } else {
-                    let mesTemp =
-                        i18n._("you just made friends with") +
-                        " " +
-                        friend.firstName +
-                        " " +
-                        friend.lastName;
-                    setMessage({ content: mesTemp, type: "text" });
-                }
-            } else if (lastMessage.type === "create_group") {
-                if (userDetails._id === lastMessage.sender._id) {
-                    let mesTemp = i18n._("You have successfully created the group");
-                    setMessage({ content: mesTemp, type: "text" });
-                } else {
-                    let mesTemp = i18n._("You have just been added to the group");
-                    setMessage({ content: mesTemp, type: "text" });
-                }
-            } else if (lastMessage.type == "text") {
-                if (lastMessage.sender._id === userDetails._id) {
-                    setMessage({
-                        content: i18n._("You") + ": " + lastMessage.content,
-                        type: "text",
-                    });
-                } else {
-                    setMessage({ content: lastMessage.content, type: "text" });
-                }
-            } else if (lastMessage.type == "image") {
-                if (lastMessage.sender._id === userDetails._id) {
-                    setMessage({ content: i18n._("You") + ": ", type: "image" });
-                } else {
-                    setMessage({ content: "", type: "image" });
-                }
-            } else {
-                if (lastMessage.sender._id === userDetails._id) {
-                    setMessage({ content: i18n._("You") + ": ", type: "file" });
-                } else {
-                    setMessage({ content: "", type: "file" });
-                }
-                if (lastMessage && lastMessage.type) {
-                    let fileName = JSON.parse(lastMessage.type).name;
-                    setFileName(fileName);
-                }
-            }
-        }
+        // if (messages.length && friend) {
+        //     const lastMessage = messages[messages.length - 1];
+        //     if (lastMessage.type === "accept_friend") {
+        //         if (userDetails._id === lastMessage.sender._id) {
+        //             let mesTemp =
+        //                 friend.firstName +
+        //                 " " +
+        //                 friend.lastName +
+        //                 " " +
+        //                 i18n._("has agreed to make friends");
+        //             setMessage({ content: mesTemp, type: "text" });
+        //         } else {
+        //             let mesTemp =
+        //                 i18n._("you just made friends with") +
+        //                 " " +
+        //                 friend.firstName +
+        //                 " " +
+        //                 friend.lastName;
+        //             setMessage({ content: mesTemp, type: "text" });
+        //         }
+        //     } else if (lastMessage.type === "create_group") {
+        //         if (userDetails._id === lastMessage.sender._id) {
+        //             let mesTemp = i18n._("You have successfully created the group");
+        //             setMessage({ content: mesTemp, type: "text" });
+        //         } else {
+        //             let mesTemp = i18n._("You have just been added to the group");
+        //             setMessage({ content: mesTemp, type: "text" });
+        //         }
+        //     } else if (lastMessage.type == "text") {
+        //         if (lastMessage.sender._id === userDetails._id) {
+        //             setMessage({
+        //                 content: i18n._("You") + ": " + lastMessage.content,
+        //                 type: "text",
+        //             });
+        //         } else {
+        //             setMessage({ content: lastMessage.content, type: "text" });
+        //         }
+        //     } else if (lastMessage.type == "image") {
+        //         if (lastMessage.sender._id === userDetails._id) {
+        //             setMessage({ content: i18n._("You") + ": ", type: "image" });
+        //         } else {
+        //             setMessage({ content: "", type: "image" });
+        //         }
+        //     } else {
+        //         if (lastMessage.sender._id === userDetails._id) {
+        //             setMessage({ content: i18n._("You") + ": ", type: "file" });
+        //         } else {
+        //             setMessage({ content: "", type: "file" });
+        //         }
+        //         if (lastMessage && lastMessage.type) {
+        //             let fileName = JSON.parse(lastMessage.type).name;
+        //             setFileName(fileName);
+        //         }
+        //     }
+        // }
         let listMessages = conversation.messages;
         let count = 0;
         for (let message of listMessages) {

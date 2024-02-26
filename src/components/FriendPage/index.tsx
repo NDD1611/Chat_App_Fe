@@ -18,12 +18,10 @@ export const FriendPage = () => {
     const selectItem = useSelector((state: RootState) => state.friend.selectItem);
 
     useEffect(() => {
-        if (window.location.pathname === "/friend") {
-            dispatch({
-                type: tabsActions.SET_MAIN_TAB,
-                maintabSelect: "friends",
-            });
-        }
+        dispatch({
+            type: tabsActions.SET_MAIN_TAB,
+            maintabSelect: "friends",
+        });
         const userDetailsJson = localStorage.getItem("userDetails");
         const userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
         if (!userDetails) {
@@ -31,11 +29,11 @@ export const FriendPage = () => {
         }
     }, []);
     return (
-        <div id="dashboard" className={classes.friendPage}>
+        <div id="friendPage" className={classes.friendPage}>
             <div className={classes.navBar}>
                 <Navbar></Navbar>
             </div>
-            <div className={classes.conversation}>
+            <div className={classes.friendList}>
                 <TabTwo>
                     <HeaderTabTwo></HeaderTabTwo>
                     <MenuItemFriend></MenuItemFriend>

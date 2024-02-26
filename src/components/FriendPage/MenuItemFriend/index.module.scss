@@ -1,3 +1,7 @@
+.listItem {
+    padding: 0 5px;
+}
+
 .Item {
     display: flex;
     cursor: pointer;
@@ -5,9 +9,14 @@
     font-size: 16px;
     font-weight: 500;
     position: relative;
+    border-radius: 5px;
 
     &:hover {
         background-color: #f7f7f8;
+    }
+
+    >p {
+        margin: 0;
     }
 
     .quantityFriendInvitation {
@@ -41,5 +50,5 @@
 }
 
 .selectItem {
-    background-color: #E5EFFF;
+    background-color: #f0f0f0;
 }

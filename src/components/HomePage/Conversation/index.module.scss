@@ -1,8 +1,10 @@
 @import '../../../styles/global.module.scss';
 
 .selectedConversation {
-    border-left: 4px solid $primary-color;
-    border-bottom: 3px solid $primary-color;
+    // border-left: 4px solid $primary-color;
+    // border-bottom: 3px solid $primary-color;
+    background-color: #F0F0F0;
+    border-radius: 5px;
 }
 
 
@@ -34,7 +36,7 @@
     }
 
     &:hover {
-        // background-color: #f3f5f6;
+        background-color: #F0F0F0;
 
         .right {
             .options {
