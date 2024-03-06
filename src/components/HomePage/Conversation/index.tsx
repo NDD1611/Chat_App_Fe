@@ -14,6 +14,7 @@ import { RootState } from "@/redux/store";
 import { useCurrentLocale } from "next-i18n-router/client";
 import i18nConfig from "../../../../i18nConfig";
 import { deleteConversation } from "@/api/conversation";
+import { checkScreenDevice } from "@/utils/screen.util";
 export const Conversation = ({ conversation }: { conversation: any }) => {
     let i18n = useLingui();
     const userDetails = useSelector((state: RootState) => state.auth.userDetails);
@@ -72,61 +73,6 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
                 }
             });
         }
-        // if (messages.length && friend) {
-        //     const lastMessage = messages[messages.length - 1];
-        //     if (lastMessage.type === "accept_friend") {
-        //         if (userDetails._id === lastMessage.sender._id) {
-        //             let mesTemp =
-        //                 friend.firstName +
-        //                 " " +
-        //                 friend.lastName +
-        //                 " " +
-        //                 i18n._("has agreed to make friends");
-        //             setMessage({ content: mesTemp, type: "text" });
-        //         } else {
-        //             let mesTemp =
-        //                 i18n._("you just made friends with") +
-        //                 " " +
-        //                 friend.firstName +
-        //                 " " +
-        //                 friend.lastName;
-        //             setMessage({ content: mesTemp, type: "text" });
-        //         }
-        //     } else if (lastMessage.type === "create_group") {
-        //         if (userDetails._id === lastMessage.sender._id) {
-        //             let mesTemp = i18n._("You have successfully created the group");
-        //             setMessage({ content: mesTemp, type: "text" });
-        //         } else {
-        //             let mesTemp = i18n._("You have just been added to the group");
-        //             setMessage({ content: mesTemp, type: "text" });
-        //         }
-        //     } else if (lastMessage.type == "text") {
-        //         if (lastMessage.sender._id === userDetails._id) {
-        //             setMessage({
-        //                 content: i18n._("You") + ": " + lastMessage.content,
-        //                 type: "text",
-        //             });
-        //         } else {
-        //             setMessage({ content: lastMessage.content, type: "text" });
-        //         }
-        //     } else if (lastMessage.type == "image") {
-        //         if (lastMessage.sender._id === userDetails._id) {
-        //             setMessage({ content: i18n._("You") + ": ", type: "image" });
-        //         } else {
-        //             setMessage({ content: "", type: "image" });
-        //         }
-        //     } else {
-        //         if (lastMessage.sender._id === userDetails._id) {
-        //             setMessage({ content: i18n._("You") + ": ", type: "file" });
-        //         } else {
-        //             setMessage({ content: "", type: "file" });
-        //         }
-        //         if (lastMessage && lastMessage.type) {
-        //             let fileName = JSON.parse(lastMessage.type).name;
-        //             setFileName(fileName);
-        //         }
-        //     }
-        // }
         let listMessages = conversation.messages;
         let count = 0;
         for (let message of listMessages) {
@@ -148,15 +94,10 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
             type: conversationActions.SET_SELECT_CONVERSATION,
             conversationSelected: conversation,
         });
-        if (window.innerWidth < 700) {
+        let device = checkScreenDevice();
+        if (device === "mobile") {
             dispatch({
-                type: tabsActions.SET_CLOSE_TAB_TWO,
-            });
-            dispatch({
-                type: tabsActions.SET_SHOW_TAB_THREE,
-            });
-            dispatch({
-                type: tabsActions.SET_CLOSE_TAB_ONE,
+                type: tabsActions.SET_SHOW_CHAT_AREA_ON_MOBILE,
             });
         }
     };
@@ -207,7 +148,7 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
                             ? conversation.groupName
                             : friend.firstName + " " + friend.lastName}
                     </div>
-                    <div className={classes.message}>
+                    {/* <div className={classes.message}>
                         {message.type == "text" && <MessageEmoji text={message.content} />}
                         {message.type == "image" && (
                             <div className="flex">
@@ -223,7 +164,7 @@ export const Conversation = ({ conversation }: { conversation: any }) => {
                                 {fileName}
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className={classes.right}>

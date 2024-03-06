@@ -40,15 +40,9 @@ export const PendingInvitation = () => {
         }
     }, []);
 
-    const showTabTwoAndCloseTabThree = () => {
+    const handleClickBackButtonInPendingInvitation = () => {
         dispatch({
-            type: tabsActions.SET_CLOSE_TAB_THREE,
-        });
-        dispatch({
-            type: tabsActions.SET_SHOW_TAB_TWO,
-        });
-        dispatch({
-            type: tabsActions.SET_SHOW_TAB_ONE,
+            type: tabsActions.SET_CLOSE_PENDING_INVITATION,
         });
     };
 
@@ -57,7 +51,10 @@ export const PendingInvitation = () => {
             <div className={styles.PendingInvitation}>
                 <div className={styles.headerInvitation}>
                     {showBackButton && (
-                        <div className={styles.backButton} onClick={showTabTwoAndCloseTabThree}>
+                        <div
+                            className={styles.backButton}
+                            onClick={handleClickBackButtonInPendingInvitation}
+                        >
                             <IconChevronLeft />
                         </div>
                     )}

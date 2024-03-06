@@ -14,6 +14,7 @@ import { RootState } from "@/redux/store";
 import i18nConfig from "../../../../i18nConfig";
 import { useCurrentLocale } from "next-i18n-router/client";
 import { deleteFriend } from "@/api/friend";
+import { checkScreenDevice } from "@/utils/screen.util";
 
 export const ListFriend = () => {
     let i18n = useLingui();
@@ -26,24 +27,20 @@ export const ListFriend = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     useEffect(() => {
-        if (window.innerWidth < 700) {
+        let device = checkScreenDevice();
+        if (device === "mobile") {
             setShowBackButton(true);
         } else {
             setShowBackButton(false);
         }
     }, []);
 
-    const showTabTwoAndCloseTabThree = () => {
+    const handleClickBackButtonInListFriend = () => {
         dispatch({
-            type: tabsActions.SET_CLOSE_TAB_THREE,
-        });
-        dispatch({
-            type: tabsActions.SET_SHOW_TAB_TWO,
-        });
-        dispatch({
-            type: tabsActions.SET_SHOW_TAB_ONE,
+            type: tabsActions.SET_CLOSE_LIST_FRIEND,
         });
     };
+
     const [idPopover, setIdPopover] = useState();
     const [clientXPopover, setClientXPopover] = useState(0);
     const [clientYPopover, setClientYPopover] = useState(0);
@@ -200,7 +197,10 @@ export const ListFriend = () => {
             <div className={styles.listFriend}>
                 <div className={styles.headerInvitation}>
                     {showBackButton && (
-                        <div className={styles.backButton} onClick={showTabTwoAndCloseTabThree}>
+                        <div
+                            className={styles.backButton}
+                            onClick={handleClickBackButtonInListFriend}
+                        >
                             <IconChevronLeft />
                         </div>
                     )}

@@ -6,6 +6,9 @@ const initState = {
     showTabTwo: true,
     showTabThree: true,
     showTabOne: true,
+    showChatAreaOnMobile: false,
+    showListFriends: false,
+    showPendingInvitation: false,
 };
 
 const reducer = (state = initState, action) => {
@@ -49,6 +52,36 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 showTabThree: false,
+            };
+        case tabsActions.SET_SHOW_CHAT_AREA_ON_MOBILE:
+            return {
+                ...state,
+                showChatAreaOnMobile: true,
+            };
+        case tabsActions.SET_CLOSE_CHAT_AREA_ON_MOBILE:
+            return {
+                ...state,
+                showChatAreaOnMobile: false,
+            };
+        case tabsActions.SET_SHOW_LIST_FRIEND:
+            return {
+                ...state,
+                showListFriends: true,
+            };
+        case tabsActions.SET_CLOSE_LIST_FRIEND:
+            return {
+                ...state,
+                showListFriends: false,
+            };
+        case tabsActions.SET_SHOW_PENDING_INVITATION:
+            return {
+                ...state,
+                showPendingInvitation: true,
+            };
+        case tabsActions.SET_CLOSE_PENDING_INVITATION:
+            return {
+                ...state,
+                showPendingInvitation: false,
             };
         default:
             return state;

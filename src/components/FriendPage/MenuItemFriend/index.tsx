@@ -11,38 +11,29 @@ export const MenuItemFriend = () => {
     const dispatch = useDispatch();
     const selectItem = useSelector((state: RootState) => state.friend.selectItem);
     const pendingInvitation = useSelector((state: RootState) => state.friend.pendingInvitations);
-
-    const showTab3AndCloseTabTwo = () => {
-        if (window.innerWidth < 700) {
-            dispatch({
-                type: tabsActions.SET_SHOW_TAB_THREE,
-            });
-            dispatch({
-                type: tabsActions.SET_CLOSE_TAB_TWO,
-            });
-            dispatch({
-                type: tabsActions.SET_CLOSE_TAB_ONE,
-            });
-        } else {
-            dispatch({
-                type: tabsActions.SET_SHOW_TAB_THREE,
-            });
-            dispatch({
-                type: tabsActions.SET_SHOW_TAB_TWO,
-            });
-        }
+    const handleClickListFriends = () => {
+        dispatch({
+            type: friendActions.SET_SELECT_ITEM_TAB_TWO,
+            selectItem: "listFriend",
+        });
+        dispatch({
+            type: tabsActions.SET_SHOW_LIST_FRIEND,
+        });
+    };
+    const handleClickPendingInvitation = () => {
+        dispatch({
+            type: friendActions.SET_SELECT_ITEM_TAB_TWO,
+            selectItem: "friendInvitation",
+        });
+        dispatch({
+            type: tabsActions.SET_SHOW_PENDING_INVITATION,
+        });
     };
     return (
         <div className={styles.listItem}>
             <div
                 className={`${styles.Item} ${selectItem === "listFriend" ? styles.selectItem : ""}`}
-                onClick={() => {
-                    dispatch({
-                        type: friendActions.SET_SELECT_ITEM_TAB_TWO,
-                        selectItem: "listFriend",
-                    });
-                    showTab3AndCloseTabTwo();
-                }}
+                onClick={handleClickListFriends}
             >
                 <div className={styles.Icon}>
                     <IconUser />
@@ -53,13 +44,7 @@ export const MenuItemFriend = () => {
                 className={`${styles.Item} ${
                     selectItem === "friendInvitation" ? styles.selectItem : ""
                 }`}
-                onClick={() => {
-                    dispatch({
-                        type: friendActions.SET_SELECT_ITEM_TAB_TWO,
-                        selectItem: "friendInvitation",
-                    });
-                    showTab3AndCloseTabTwo();
-                }}
+                onClick={handleClickPendingInvitation}
             >
                 <div className={styles.Icon}>
                     <IconMailOpened />

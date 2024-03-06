@@ -1,20 +1,17 @@
 .HeaderTabTwo {
-    display: flex;
-    padding: 10px 10px;
-    gap: 10px;
+    display: grid;
     border-bottom: 1px solid #ccc;
+    grid-template-columns: auto 30px 30px;
+    padding: 10px;
 }
 
 .input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     input {
         border: none;
         background-color: #eaedf0;
         padding: 3px 10px;
-        // height: 30px;
+        width: 100%;
         border-radius: 5px;
 
         &:focus {
@@ -30,8 +27,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 32px;
-    width: 32px;
+    // height: 32px;
+    // width: 32px;
 
     // &:hover {
     //     background-color: #eaedf0;
@@ -43,8 +40,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 32px;
-    width: 32px;
+    // height: 32px;
+    // width: 32px;
 
     span {
         font-weight: 600;
