@@ -7,10 +7,11 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
     function (config) {
-        const userDetailsJson = localStorage.getItem("userDetails");
-        const userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
-        if (userDetails) {
-            config.headers.token = userDetails.token;
+        const tokenJson = localStorage.getItem("tokens");
+        const tokens = tokenJson ? JSON.parse(tokenJson) : null;
+        console.log(tokens);
+        if (tokens) {
+            config.headers.authorization = tokens.accessToken;
         }
         return config;
     },

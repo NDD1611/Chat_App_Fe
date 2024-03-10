@@ -4,7 +4,7 @@ import { store } from "../redux/store";
 import { authActions } from "../redux/actions/authAction";
 import { friendActions } from "../redux/actions/friendAction";
 import { conversationActions } from "../redux/actions/conversationAction";
-import api from "../api/api";
+import { refreshToken } from "../api/api";
 
 export let socket = null;
 export const socketConnectToServer = (userDetails) => {
@@ -23,7 +23,7 @@ export const socketConnectToServer = (userDetails) => {
     socket.on("connect_error", async (err) => {
         if (err.message === "TokenExpire") {
             let userDetails = JSON.parse(localStorage.getItem("userDetails"));
-            let response = await api.refreshToken(userDetails);
+            let response = await refreshToken(userDetails);
             if (response && response.data) {
                 localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails));
                 socketConnectToServer(response.data.userDetails);

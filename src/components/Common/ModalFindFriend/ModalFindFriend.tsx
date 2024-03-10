@@ -4,7 +4,6 @@ import { useState } from "react";
 import { modalActions } from "@/redux/actions/modalActions";
 import { tabsActions } from "@/redux/actions/tabsAction";
 import { conversationActions } from "@/redux/actions/conversationAction";
-import api from "@/api/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useLingui } from "@lingui/react";

@@ -57,10 +57,10 @@ export const checkShowTimeAndStatusInBottom = (messages: any, i18n: any) => {
             let message = messages[i];
             messages[i].showStatus = false;
             let lastMessage = messages[i - 1];
-            if (message.sameDay === false) {
+            if (!message.sameDay) {
                 messages[i - 1].showTime = true;
             }
-            if (message.sameAuth === false) {
+            if (!message.sameAuth) {
                 messages[i - 1].showTime = true;
             }
         }
@@ -101,4 +101,18 @@ export const calcFileSize = (size: any): any => {
             sizeType: "MB",
         };
     }
+};
+
+export let checkSameAuthWithPreviousMessage = (preMessage: any, message: any) => {
+    if (preMessage) {
+        return message.sender._id === preMessage.sender._id;
+    }
+    return false;
+};
+
+export let checkSameAuthWithNextMessage = (message: any, nextMessage: any) => {
+    if (nextMessage) {
+        return message.sender._id === nextMessage.sender._id;
+    }
+    return false;
 };

@@ -2,7 +2,6 @@ import styles from "./index.module.scss";
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions } from "@/redux/actions/modalActions";
-import api from "@/api/api";
 import { toast } from "react-toastify";
 import { authActions } from "@/redux/actions/authAction";
 import { ExpandDate } from "./ExpandDate";

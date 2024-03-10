@@ -1,14 +1,15 @@
+.containerLeft {
+    display: flex;
+    justify-content: center;
+    padding: 0 5px;
+    padding-top: 5px;
+    width: 40px;
+    margin-right: 5px;
+}
+
 .messageLeft {
     padding-top: 5px;
 
-    .containerLeft {
-        display: flex;
-        justify-content: center;
-        padding: 0 5px;
-        padding-top: 5px;
-        width: 40px;
-        margin-right: 5px;
-    }
 
     .content {
         padding: 5px 10px;

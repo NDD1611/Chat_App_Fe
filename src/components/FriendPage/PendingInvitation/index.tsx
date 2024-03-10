@@ -58,7 +58,9 @@ export const PendingInvitation = () => {
                             <IconChevronLeft />
                         </div>
                     )}
-                    <IconMailOpened />
+                    <div className={styles.headerIcon}>
+                        <IconMailOpened />
+                    </div>
                     {i18n._("Friend request")}
                 </div>
                 {pendingInvitations.length === 0 && (

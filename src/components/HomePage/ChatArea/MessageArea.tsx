@@ -1,11 +1,14 @@
 import styles from "./MessageArea.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useRef } from "react";
-import { addSameDayAndSameAuth, checkShowTimeAndStatusInBottom } from "@/utils/message.util";
+import {
+    checkSameAuthWithNextMessage,
+    checkSameAuthWithPreviousMessage,
+} from "@/utils/message.util";
 import { updateStatusMessage } from "@/socket/connection.socket";
 import { conversationActions } from "@/redux/actions/conversationAction";
-import { MessageLeft } from "../MessageLeft";
-import { MessageRight } from "../MessageRight/MessageRight";
+import MessageLeft from "../MessageLeft";
+import MessageRight from "../MessageRight/MessageRight";
 import { messageActions } from "@/redux/actions/messageActions";
 import { useLingui } from "@lingui/react";
 import { Avatar, Divider } from "@mantine/core";
@@ -26,6 +29,8 @@ export const MessageArea = () => {
     const dispatch = useDispatch();
     const locale = useCurrentLocale(i18nConfig);
 
+    let lengthMessage = messages.length;
+
     useEffect(() => {
         const userDetailsJson = localStorage.getItem("userDetails");
         const userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
@@ -38,8 +43,6 @@ export const MessageArea = () => {
         if (conversations) {
             conversations.forEach((conversation: any) => {
                 if (conversationId === conversation._id) {
-                    addSameDayAndSameAuth(conversation.messages);
-                    checkShowTimeAndStatusInBottom(conversation.messages, i18n);
                     setMessages(JSON.parse(JSON.stringify(conversation.messages)));
                 }
             });
@@ -105,6 +108,11 @@ export const MessageArea = () => {
             <div style={{ height: "30px" }}></div>
             {messages &&
                 messages.map((message: any, index: number) => {
+                    let preMessage = messages[index - 1];
+                    let nextMessage = messages[index + 1];
+                    let sameAuthPre = checkSameAuthWithPreviousMessage(preMessage, message);
+                    let sameAuthNext = checkSameAuthWithNextMessage(message, nextMessage);
+                    let isLastMessage = lengthMessage - 1 === index;
                     if (message.type === "accept_friend") {
                         if (message.sender._id === userDetails._id) {
                             return (
@@ -175,27 +183,23 @@ export const MessageArea = () => {
                     if (message.sender._id === userDetails._id) {
                         return (
                             <div key={message._id}>
-                                <MessageRight message={message} />
+                                <MessageRight
+                                    message={message}
+                                    isLastMessage={isLastMessage}
+                                    status={message.status}
+                                />
                             </div>
                         );
                     } else {
                         return (
                             <div key={message._id}>
-                                {message.sameDay === false && <Divider label={message.dateShow} />}
                                 <div className={styles.containerMessageLeft}>
-                                    <div className={styles.containerLeft}>
-                                        {(message.sameAuth === false ||
-                                            message.sameDay === false ||
-                                            (index == 0 &&
-                                                message?.sender?._id != userDetails._id)) && (
-                                            <Avatar
-                                                src={message?.sender?.avatar}
-                                                style={{ backgroundColor: "#fff" }}
-                                                size={"md"}
-                                            />
-                                        )}
-                                    </div>
-                                    <MessageLeft message={message} />
+                                    <MessageLeft
+                                        message={message}
+                                        sameAuthPre={sameAuthPre}
+                                        sameAuthNext={sameAuthNext}
+                                        isLastMessage={isLastMessage}
+                                    />
                                 </div>
                             </div>
                         );

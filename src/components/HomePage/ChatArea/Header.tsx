@@ -3,7 +3,6 @@ import styles from "./Header.module.scss";
 import { useEffect, useState } from "react";
 import { tabsActions } from "@/redux/actions/tabsAction";
 import { LoaderModal } from "@/components/Common/LoaderModal";
-import api from "@/api/api";
 import { modalActions } from "@/redux/actions/modalActions";
 import { toast } from "react-toastify";
 import { friendActions } from "@/redux/actions/friendAction";

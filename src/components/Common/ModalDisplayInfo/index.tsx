@@ -6,6 +6,7 @@ import { modalActions } from "@/redux/actions/modalActions";
 import { Avatar, Button, Modal } from "@mantine/core";
 import { RootState } from "@/redux/store";
 import { IconEdit } from "@tabler/icons-react";
+import Image from "next/image";
 
 export const ModalDisplayInfo = () => {
     const { i18n } = useLingui();
@@ -44,7 +45,8 @@ export const ModalDisplayInfo = () => {
         >
             <div className={styles.contentModalInfo}>
                 <div className={styles.image}>
-                    <img src="/images/backgroundProfile.jpg" />
+                    {/* <img src="/images/backgroundProfile.jpg" /> */}
+                    <Image src="/images/backgroundProfile.jpg" alt="content modal" fill />
                 </div>
                 <div className={styles.avatarInfo}>
                     <Avatar src={avatarLink} size={"lg"} alt="avatar"></Avatar>

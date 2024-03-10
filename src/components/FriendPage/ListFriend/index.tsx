@@ -128,15 +128,10 @@ export const ListFriend = () => {
             });
         }
 
-        if (window.innerWidth < 700) {
+        let device = checkScreenDevice();
+        if (device === "mobile") {
             dispatch({
-                type: tabsActions.SET_CLOSE_TAB_TWO,
-            });
-            dispatch({
-                type: tabsActions.SET_SHOW_TAB_THREE,
-            });
-            dispatch({
-                type: tabsActions.SET_CLOSE_TAB_ONE,
+                type: tabsActions.SET_SHOW_CHAT_AREA_ON_MOBILE,
             });
         }
 

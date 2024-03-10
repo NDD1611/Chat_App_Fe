@@ -1,4 +1,7 @@
 {
+  "Group chat with friends": "Group chat with friends",
+  "Chat with friends": "Chat with friends",
+  "Send files": "Send files",
   "Friend request": "Friend request",
   "Email isn't exist!": "Email isn't exist!",
   "Wrong password!": "Wrong password!",
@@ -54,7 +57,6 @@
   "just accessed": "just accessed",
   "Stranger": "Stranger",
   "Send a friend request to this person": "Send a friend request to this person",
-  "Select a conversation to chat": "Select a conversation to chat",
   "Send message to ": "Send message to ",
   "has agreed to make friends": "has agreed to make friends",
   "you just made friends with": "you just made friends with",

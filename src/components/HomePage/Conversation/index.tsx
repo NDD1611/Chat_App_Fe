@@ -5,7 +5,6 @@ import { conversationActions } from "@/redux/actions/conversationAction";
 import { updateReceivedMessageStatus } from "@/socket/connection.socket";
 import { tabsActions } from "@/redux/actions/tabsAction";
 import { MessageEmoji } from "../MessageEmoji";
-import api from "@/api/api";
 import { Box, Menu, rem } from "@mantine/core";
 import { IconDots, IconPaperclip, IconPhotoFilled, IconTrash } from "@tabler/icons-react";
 import { useLingui } from "@lingui/react";

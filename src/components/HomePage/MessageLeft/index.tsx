@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { MessageEmoji } from "../MessageEmoji";
 import styles from "./index.module.scss";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FileMessage } from "../FileMessage";
 import { memo } from "react";
 import { RootState } from "@/redux/store";
@@ -26,16 +26,48 @@ const Content = ({ message }: { message: any }) => {
         return <FileMessage message={message} bgColor="#ccc" />;
     }
 };
-export const MessageLeft = ({ message }: { message: any }) => {
-    const theme = useSelector((state: RootState) => state.themeMode.theme);
+function arePropsEqual(oldProps: any, newProps: any) {
     return (
-        <>
-            <div className={`${styles.messageLeft} ${theme === "dark" && styles.messageLeftDark}`}>
-                <Content message={message} />
-                <div className={styles.footerDate}>
-                    {message.showTime ? message.hourMinute : ""}
-                </div>
-            </div>
-        </>
+        oldProps.message._id === newProps.message._id &&
+        oldProps.isLastMessage === newProps.isLastMessage
     );
-};
+}
+const MessageLeft = memo(
+    ({
+        message,
+        sameAuthPre,
+        sameAuthNext,
+        isLastMessage,
+    }: {
+        message: any;
+        sameAuthPre: Boolean;
+        sameAuthNext: Boolean;
+        isLastMessage: Boolean;
+    }) => {
+        let date = new Date(message?.date);
+        let dateString = `
+        ${date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}
+        :
+        ${date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()}`;
+        return (
+            <>
+                <div className={styles.containerLeft}>
+                    {!sameAuthPre && (
+                        <Avatar
+                            src={message?.sender?.avatar}
+                            style={{ backgroundColor: "#fff" }}
+                            size={"md"}
+                        />
+                    )}
+                </div>
+                <div className={`${styles.messageLeft}`}>
+                    <Content message={message} />
+                    <div className={styles.footerDate}>{!sameAuthNext && dateString}</div>
+                </div>
+            </>
+        );
+    },
+    arePropsEqual,
+);
+MessageLeft.displayName = "MessageLeft";
+export default MessageLeft;

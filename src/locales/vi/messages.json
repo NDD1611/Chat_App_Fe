@@ -1,4 +1,7 @@
 {
+    "Group chat with friends": "Chat nhóm với bạn bè",
+    "Chat with friends": "Chat với bạn bè",
+    "Send files": "Gửi file",
     "Friend request": "Yêu cầu kết bạn",
     "Email isn't exist!": "Email không tồn tại",
     "Wrong password!": "Sai mật khẩu",
@@ -54,7 +57,6 @@
     "just accessed": "Vừa truy cập",
     "Stranger": "Người lạ",
     "Send a friend request to this person": "Gửi yêu cầu kết bạn tới người này",
-    "Select a conversation to chat": "Chọn cuộc trò chuyện để trò chuyện",
     "Send message to ": "Gửi tin nhắn đến ",
     "has agreed to make friends": "đã đồng ý kết bạn",
     "you just made friends with": "bạn vừa kết bạn với",

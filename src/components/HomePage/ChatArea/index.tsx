@@ -6,13 +6,14 @@ import { sendMessage, sendMessageGroup } from "@/socket/connection.socket";
 import { MessageArea } from "./MessageArea";
 import { conversationActions } from "@/redux/actions/conversationAction";
 import { HeaderChatArea } from "./Header";
-import api from "@/api/api";
 import { IconTopInputArea } from "./IconTopInputArea";
 import { useLingui } from "@lingui/react";
 import { IconMoodSmile, IconSend } from "@tabler/icons-react";
 import { RootState } from "@/redux/store";
 import EmojiPicker from "emoji-picker-react";
 import { createNewConversation } from "@/api/conversation";
+import { Carousel } from "@mantine/carousel";
+import { Box, Flex, Image, Text } from "@mantine/core";
 
 const ChatArea = () => {
     const { i18n } = useLingui();
@@ -64,8 +65,7 @@ const ChatArea = () => {
                 let height =
                     window.innerHeight -
                     heightInputArea.clientHeight -
-                    headerContainerElement.clientHeight -
-                    10;
+                    headerContainerElement.clientHeight;
                 messageArea.style.height = height + "px";
             }
         });
@@ -91,15 +91,6 @@ const ChatArea = () => {
                 headerContainerElement.clientHeight;
             messageArea.style.height = height - 5 + "px";
         }
-
-        // let chatAreaElement = document.getElementById("chatArea");
-        // let rightInputElement = document.getElementById("rightInput");
-        // let divInputElement = document.getElementById("divInput");
-
-        // if (chatAreaElement && rightInputElement && divInputElement) {
-        //     let widthInput = chatAreaElement.clientWidth - rightInputElement.clientWidth;
-        //     divInputElement.style.width = widthInput - 5 + "px";
-        // }
     });
     const handleEmojiClick = (event: any) => {
         let divInput = document.getElementById("divInput");
@@ -257,11 +248,50 @@ const ChatArea = () => {
     const handleStopPropagation = (e: any) => {
         e.stopPropagation();
     };
+    let dataCarousel = [
+        {
+            src: "/chat_group.jpg",
+            title: i18n._("Group chat with friends"),
+        },
+        {
+            src: "/chat_friend.png",
+            title: i18n._("Chat with friends"),
+        },
+        {
+            src: "/send_file.png",
+            title: i18n._("Send files"),
+        },
+    ];
+    let carouselSlide = dataCarousel.map((slide) => {
+        return (
+            <Carousel.Slide key={slide.src}>
+                <Flex direction={"column"} justify={"center"} align={"center"}>
+                    <Image className={styles.imageCarousel} src={slide.src} />
+                    <Text pt={10} color="blue" size="20px">
+                        {slide.title}
+                    </Text>
+                </Flex>
+            </Carousel.Slide>
+        );
+    });
+
     return (
         <div id="chatArea" className={styles.ChatArea}>
             {conversationSelected === null && (
                 <div className={styles.chatOnboard}>
-                    <div>{i18n._("Select a conversation to chat")}</div>
+                    {/* <div>{i18n._("Select a conversation to chat")}</div> */}
+
+                    <Carousel
+                        w="100%"
+                        classNames={styles}
+                        slideGap="md"
+                        loop
+                        slideSize="100%"
+                        withIndicators
+                        pb={50}
+                    >
+                        {carouselSlide}
+                    </Carousel>
                 </div>
             )}
             <div id="headerContainer" ref={headerElement}>
