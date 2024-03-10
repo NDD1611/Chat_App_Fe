@@ -2,10 +2,9 @@ import axios from "./axios";
 import axiosFile from "./axiosSendFile";
 import { logout } from "../utils/auth.util";
 
-export const refreshToken = async (userDetails) => {
+export const refreshToken = async ({ refreshToken, userId, email }) => {
     try {
-        let response = await axios.post("/auth/refresh-token", { userDetails: userDetails });
-        return response;
+        return await axios.post("/api/v1/refresh-token", { refreshToken, userId, email });
     } catch (exception) {
         return {
             err: true,
@@ -89,12 +88,3 @@ export let testQueryLimit = async () => {
         };
     }
 };
-
-// export default {
-//     refreshToken,
-//     uploadFile,
-//     uploadAvatar,
-//     uploadImageMessage,
-//     downLoadFile,
-//     testQueryLimit,
-// };

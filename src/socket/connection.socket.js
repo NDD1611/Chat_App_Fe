@@ -21,17 +21,29 @@ export const socketConnectToServer = (userDetails) => {
         console.log(socket.id);
     });
     socket.on("connect_error", async (err) => {
-        if (err.message === "TokenExpire") {
+        if (err.message === "TokenExpiredError") {
+            let tokens = JSON.parse(localStorage.getItem("tokens"));
             let userDetails = JSON.parse(localStorage.getItem("userDetails"));
-            let response = await refreshToken(userDetails);
-            if (response && response.data) {
-                localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails));
+
+            let response = await refreshToken({
+                refreshToken: tokens.refreshToken,
+                userId: userDetails._id,
+                email: userDetails.email,
+            });
+            if (response.err) {
+                logout();
+            } else {
+                let tokens = response?.data?.metadata?.tokens;
+                localStorage.setItem("tokens", JSON.stringify(tokens));
                 socketConnectToServer(response.data.userDetails);
             }
-        } else if (err.message !== "UserConnected") {
-            logout();
         }
     });
+
+    socket.on("logout", () => {
+        logout();
+    });
+
     socket.on("update-friend-invitation", (data) => {
         const { pendingInvitations } = data;
         store.dispatch({
@@ -39,6 +51,7 @@ export const socketConnectToServer = (userDetails) => {
             pendingInvitations: pendingInvitations,
         });
     });
+
     socket.on("update-conversation", (data) => {
         const { conversations } = data;
         store.dispatch({
@@ -46,6 +59,7 @@ export const socketConnectToServer = (userDetails) => {
             conversations: conversations,
         });
     });
+
     socket.on("update-list-friend", (data) => {
         const { listFriends } = data;
         store.dispatch({
@@ -53,6 +67,7 @@ export const socketConnectToServer = (userDetails) => {
             listFriends: listFriends,
         });
     });
+
     socket.on("update-watched-status-message-in-redux-store", (data) => {
         const { listMessage, conversationId } = data;
         store.dispatch({
@@ -61,6 +76,7 @@ export const socketConnectToServer = (userDetails) => {
             conversationId,
         });
     });
+
     socket.on("update-sent-status-message-in-redux-store", (data) => {
         const { listMessage, conversationId } = data;
         store.dispatch({
@@ -69,6 +85,7 @@ export const socketConnectToServer = (userDetails) => {
             conversationId,
         });
     });
+
     socket.on("update-received-status-message-in-redux-store", (data) => {
         const { listMessage, conversationId } = data;
         store.dispatch({
@@ -77,6 +94,7 @@ export const socketConnectToServer = (userDetails) => {
             conversationId,
         });
     });
+
     socket.on("all-active-user", (data) => {
         const { activeUsers } = data;
         store.dispatch({
@@ -84,18 +102,21 @@ export const socketConnectToServer = (userDetails) => {
             activeUsers: activeUsers,
         });
     });
+
     socket.on("update-friends-user-details", (data) => {
         const { friends } = data;
         let userDetails = JSON.parse(localStorage.getItem("userDetails"));
         userDetails.friends = friends;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
     });
+
     socket.on("update-token", (data) => {
         let { token } = data;
         let userDetails = JSON.parse(localStorage.getItem("userDetails"));
         userDetails.token = token;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
     });
+
     socket.on("sendOneMessage", (data) => {
         let { message } = data;
         let conversations = [...store.getState()?.conversation?.conversations];
@@ -114,8 +135,8 @@ export const socketConnectToServer = (userDetails) => {
     });
 
     setInterval(() => {
-        let userDetails = JSON.parse(localStorage.getItem("userDetails"));
-        socket.emit("check-token-expire", userDetails);
+        let tokens = JSON.parse(localStorage.getItem("tokens"));
+        socket.emit("check-token-expire", tokens);
     }, process.env.NEXT_PUBLIC_TIME_CHECK_TOKEN);
 };
 

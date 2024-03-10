@@ -9,7 +9,6 @@ apiClient.interceptors.request.use(
     function (config) {
         const tokenJson = localStorage.getItem("tokens");
         const tokens = tokenJson ? JSON.parse(tokenJson) : null;
-        console.log(tokens);
         if (tokens) {
             config.headers.authorization = tokens.accessToken;
         }

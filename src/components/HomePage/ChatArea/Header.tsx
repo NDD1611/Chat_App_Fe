@@ -170,13 +170,13 @@ export const HeaderChatArea = () => {
                 </div>
                 {!isFriend && !isGroup && (
                     <Box component="div" className={styles.sendInviteFriend}>
-                        <Box component="div" p={10}>
+                        {/* <Box component="div" p={10}>
                             <IconUserPlus size={20} />
                             <Box component="span" ml={10}>
                                 {i18n._("Send a friend request to this person")}
                             </Box>
-                        </Box>
-                        <Button mr={30} p={5} component="div" onClick={addFriend}>
+                        </Box> */}
+                        <Button p={5} component="div" onClick={addFriend}>
                             {i18n._("Make friend")}
                         </Button>
                     </Box>
